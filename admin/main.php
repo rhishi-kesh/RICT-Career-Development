@@ -129,10 +129,16 @@
                                     <td><?= $increment++ ?></td>
                                     <td><?= $item['post_title'] ?></td>
                                     <td>
-                                       <a href="updatejobpost.php?id=<?= $item['id'] ?>" style="text-decoration: none">
+                                       <form action="" method="POST" class="d-inline-block ms-1">
+                                          <input type="hidden" name="status_id" value="<?= $item['id'] ?>">
+                                          <button type="submit" name="status" class="<?php echo $item['status'] == '0' ? "bg-success" : "bg-danger" ?> text-white border-0">
+                                          <?php echo $item['status'] == '0' ? "Active" : "Deactive" ?>
+                                          </button>
+                                       </form>
+                                       <a href="updatejobpost.php?id=<?= $item['id'] ?>" style="text-decoration: none" class="ms-1">
                                           <i class="fa-regular fa-pen-to-square"></i>
                                        </a>
-                                       <form action="" method="POST" class="d-inline-block ms-1">
+                                       <form action="" method="POST" class="d-inline-block ms-1" onsubmit="">
                                           <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
                                           <button type="submit" name="delete" class="bg-white border-0">
                                              <i class="fa-solid fa-trash text-danger"></i>
@@ -195,11 +201,44 @@
       $result = mysqli_fetch_assoc($query);
       $destination = "upload/".$result['company_logo'];
 
-      $delete_sql = "DELETE FROM `jobposts` WHERE id = $id";
-      $result = mysqli_query($conn, $delete_sql);
-      if($result){
-         unlink($destination);
-         header("Location: main.php");
+      $sql2 = "SELECT * FROM `applications` WHERE `job_post_id` = '$id'";
+      $query2 = mysqli_query($conn, $sql2);
+      $rows = mysqli_num_rows($query2);
+      if($rows){
+         ?>
+            <script>
+               alert('OK')
+            </script>
+         <?php
+      }else{
+         $delete_sql = "DELETE FROM `jobposts` WHERE id = $id";
+         $result = mysqli_query($conn, $delete_sql);
+         if($result){
+            unlink($destination);
+            header("Location: main.php");
+         }
+      }
+      
+   }
+
+   if(isset($_POST['status'])){
+      $id = $_POST['status_id'];
+
+      $sql = "SELECT * FROM `jobposts` WHERE `id` = '$id'";
+      $query = mysqli_query($conn, $sql);
+      $result = mysqli_fetch_assoc($query);
+      if($result['status'] == 0){
+         $sql = "UPDATE `jobposts` SET `status`='1' WHERE `id` = '$id'";
+         $query = mysqli_query($conn, $sql);
+         if($query){
+            header("Location: main.php");
+         }
+      }else{
+         $sql = "UPDATE `jobposts` SET `status`='0' WHERE `id` = '$id'";
+         $query = mysqli_query($conn, $sql);
+         if($query){
+            header("Location: main.php");
+         }
       }
    }
 ?>

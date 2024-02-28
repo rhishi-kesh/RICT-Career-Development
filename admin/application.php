@@ -214,7 +214,6 @@
       <script src="vendor/js/sb-admin-2.min.js"></script>
       <!-- Page level plugins -->
       <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-      <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
       <script>
          CKEDITOR.replace( 'blog_body' );
       </script>
@@ -231,10 +230,16 @@
 
    if(isset($_POST['delete'])){
       $id = $_POST['delete_id'];
+      $sql2 = "SELECT * FROM `applications` WHERE `id` = '$id'";
+      $query2 = mysqli_query($conn, $sql2);
+      $result = mysqli_fetch_assoc($query2);
+      $destination = "../upload/".$result['cv'];
 
+      
       $delete_sql = "DELETE FROM `applications` WHERE `id` = $id";
       $result = mysqli_query($conn, $delete_sql);
       if($result){
+         unlink($destination);
          header("Location: application.php");
       }
    }

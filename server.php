@@ -238,8 +238,6 @@
     }else{
         $respons['message'] = 'Any Feild Cannot be empty';
     }
-
-
     header('Content-Type: application/json');
 	  echo json_encode($respons);
 
