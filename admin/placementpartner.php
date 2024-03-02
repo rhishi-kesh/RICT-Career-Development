@@ -2,11 +2,12 @@
  include 'config.php';
  session_start();
  if(!isset($_SESSION['user_name'])){
-     header('location: main.php');
+     header('location: index.php');
   }
 
   if(isset($_POST['save_image'])){
-    $file_name= $_FILES['save_image']['name'];
+
+    $file_name= $_FILES['image']['name'];
     $random = rand(000,999);
     $random = str_pad($random, 3, '0', STR_PAD_LEFT);
     $file_name = $random.$file_name;
@@ -17,7 +18,7 @@
     $query = mysqli_query($conn, $sql);
     if($query){
         move_uploaded_file($tmp_name,"upload/partners/".$file_name);
-        header('location: main.php');
+        header('location: placementpartner.php');
     }else{
         $failed_data = "data instert faild";
     }
