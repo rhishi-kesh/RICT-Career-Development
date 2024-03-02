@@ -1,0 +1,241 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+	--orange: #E16127;
+	--blue: #002147;
+	--white: #fff;
+	--black: #000;
+}
+h2{
+	color: var(--blue);
+}
+#jobs .job-item a{
+	display: block;
+	color: var(--black);
+	text-decoration: none;
+	margin-top: 10px;
+}
+.demo a{
+	font-weight: 700;
+}
+.btn-primary{
+	background: var(--blue) !important;
+	border: none !important;
+	color: var(--white) !important;
+}
+.bg-primary{
+	background: var(--blue) !important;
+	color: var(--white) !important;
+}
+.hero h1{
+	color: var(--blue);
+}
+.text-orange{
+	color: var(--orange);
+}
+
+/* navBar */
+
+#navbtn{
+	color:var(--blue);
+	font-weight: 700;
+	transition: 0.4s ease;
+	position: relative;
+	text-decoration: none;
+	transition: 0.5s;
+}
+#navbtn::before{
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 0%;
+	height: 3px;
+	background: var(--orange);
+	transition: 0.5s;
+}
+#navbtn:hover::before{
+	width: 100%;
+}
+
+/* career header first section */
+
+.banner{
+	width: 100%;
+	height: 80vh;
+	background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),url('../images/bgimage.jpg');
+	background-size: cover;
+	background-position: center;
+	position: relative;
+}
+.banner .content{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.banner .content h1{
+	color: var(--white);
+	letter-spacing: 2px;
+	font-size: 60px;
+}
+.banner .content p{
+	color: var(--white);
+	padding-top: 10px;
+}
+.banner .content a{
+	padding: 8px 15px;
+	font-weight: 700;
+	color: var(--white);
+	border: 2px solid rgb(236, 228, 228);
+	letter-spacing: 3px;
+	border-radius: 4px;
+	text-decoration: none;
+	display: inline-block;
+	margin-top: 10px;
+}
+.banner .content a:hover{
+	color: var(--orange);
+	background: var(--white);
+	border: 2px solid var(--white);
+}
+
+/* card */
+
+#img{
+	width: 80px;
+}
+.goal{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.goal h4{
+	color: var(--blue);
+}
+.card{
+	border: none;
+	border-left: 6px solid var(--blue);
+	background-color: #F8F9FA;
+	box-shadow: none;
+	transition: 0.5s;
+}
+.card:hover{
+	border-left: 6px solid var(--orange);
+	box-shadow: 1px 1px 8px rgba(80, 80, 80,0.3);
+}
+/* future-career start */
+.future-career1{
+	margin-top: 100px;
+}
+.future-career .join{
+	padding-bottom: 15px;
+}
+.future-career h1{
+	color: var(--blue);
+	font-weight: 600;
+}
+
+/* create an account  */
+
+.contact-form .image-holder {
+	background:url('../images/job.jpg');
+	background-size:cover;
+	width: 50%;
+	height: 500px;
+}
+.contact-form form {
+	width:50%;
+	height: 500px;
+	background: #F8F9FA;
+	padding: 20px 20px;
+}
+.contact-form form h2 {
+	font-size:24px;
+	line-height:1.5;
+	margin-bottom:30px;
+}
+.contact-form form input:focus{
+	border: 1px solid var(--orange);
+}
+#submit{
+	background: var(--blue);
+	color: var(--white);
+	font-weight: 800;
+	transition: 0.5s;
+}
+#submit:hover{
+	background-color: var(--orange);
+}
+#submit:active{
+	background-color: var(--orange);
+}
+@media (max-width:991px) {
+	.banner{
+		height: 50vh;
+	}
+	.banner .content h1{
+		font-size: 40px;
+		margin-top: 60px;
+	}
+	.register-photo form {
+	  padding: 40px;
+	}
+	.contact-form .image-holder {
+		display: none;
+	}
+	.contact-form form {
+		width:100%;
+	}
+}
+
+@media screen and (max-width: 767px){
+	.grid-container{
+		display: block;
+	}
+	.img{
+		width: 500px;
+		height: 20vh;
+		margin-bottom: 10px;
+	}
+	.img2{
+		width: 500px;
+		height: 20vh;
+		margin-bottom: 10px;
+	}
+	#navbtn{
+		margin: 5px 0;
+		display: inline-block;
+	}
+	.banner .content{
+		width: 90%;
+		margin: auto;
+	}
+	.banner .content h1{
+		font-size: 26px;
+	}
+	.banner .content p{
+		font-size: 16px;
+	}
+	.banner .content a{
+		padding: 5px 10px;
+	}
+}
+@media screen and (max-width:575px){
+    .grid-container{
+		display: block;
+	}
+	.img{
+		width: 400px;
+		height: 20vh;
+		margin-bottom: 7px;
+	}
+	.img2{
+		width: 400px;
+		height: 20vh;
+		margin-bottom: 7px;
+	}
+}

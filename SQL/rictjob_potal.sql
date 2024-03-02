@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `applications` (
   `id` int NOT NULL AUTO_INCREMENT,
   `job_post_id` int NOT NULL,
   `name` varchar(100) NOT NULL,
-  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `number` varchar(20) NOT NULL,
   `age` int NOT NULL,
   `uni_ins_name` varchar(191) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `applications` (
   `year_senmister_name` varchar(100) NOT NULL,
   `cv` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `applications`
@@ -59,14 +59,14 @@ INSERT INTO `applications` (`id`, `job_post_id`, `name`, `email`, `number`, `age
 DROP TABLE IF EXISTS `jobposts`;
 CREATE TABLE IF NOT EXISTS `jobposts` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `post_title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `company_title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `post_title` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `company_title` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `company_logo` varchar(191) NOT NULL,
   `company_details` text NOT NULL,
   `job_position` varchar(191) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `jobposts`
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
