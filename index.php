@@ -1,7 +1,7 @@
 <?php
 
 	include 'admin/config.php';
-	$sql = "SELECT * FROM `jobposts` WHERE `status` = 0";
+	$sql = "SELECT * FROM `partners` WHERE `id` = 0";
 	$query = mysqli_query($conn, $sql);
 
 ?>
@@ -131,10 +131,14 @@
         </div>
       </div>
       <div class="row justify-content-center">
+		<?php
+			if(!empty($query)){
+				foreach($query as $item){
+		?>
         <div class="col-12 col-md-4">
           <div class="row justify-content-center">
             <div class="col-4 align-self-center text-center mt-4 mt-md-0">
-              <img src="assets/images/1.png" alt="" class="img-fluid" />
+              <img src="assets/images/1.png<?= $item['save_imagae']?>" alt="" class="img-fluid" />
             </div>
             <div class="col-4 align-self-center text-center mt-4 mt-md-0">
               <img src="assets/images/2.png" alt="" class="img-fluid" />
@@ -142,8 +146,14 @@
             <div class="col-4 align-self-center text-center mt-4 mt-md-0">
               <img src="assets/images/3.png" alt="" class="img-fluid" />
             </div>
-          </div>
+          </div> 
         </div>
+		<?php
+			}
+		}else{
+			echo "No found data";
+		}
+		?>
       </div>
     </div>
   </section>
@@ -206,61 +216,5 @@
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/jquery-3.7.1.js"></script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- hero-end -->
-
-
-    <!-- <section class="py-5" id="jobs">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-12 text-center">
-    				<h2 class="fw-bold">Job Lists</h2>
-    				<p class="lead">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum, amet.</p>
-    			</div>
-    		</div>
-    		<div class="row">
-				<?php 
-					if(!empty($query)){
-						foreach($query as $item){ 
-				?>
-							<div class="col-12 mt-4">
-								<div style="border: 1px solid #ddd" class="job-item p-3">
-									<a href="single_jobpost.php?id=<?= $item['id'] ?>" class="d-block">
-										<div class="d-block d-md-flex justify-content-start">
-											<div class="d-block d-md-flex align-items-center justify-content-center me-4">
-												<img src="admin/upload/<?= $item['company_logo'] ?>" alt="" style="width: 150px;">
-											</div>
-											<div>
-												<h4><?= $item['post_title'] ?></h4>
-												<p class="lead"><?= $item['company_title'] ?></p>
-											</div>
-										</div>
-									</a>
-								</div>
-							</div>
-				<?php
-						} 
-					}else{
-						echo "No Job Found";
-					}
-				?>
-    		</div>
-    	</div>
-    </section> -->
-
-   
-	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
 </body>
 </html>

@@ -16,7 +16,7 @@
     $sql = "INSERT INTO `partners`(`image`) VALUES ('$file_name')";
     $query = mysqli_query($conn, $sql);
     if($query){
-        move_uploaded_file($tmp_name,"partners/".$file_name);
+        move_uploaded_file($tmp_name,"upload/partners/".$file_name);
         header('location: main.php');
     }else{
         $failed_data = "data instert faild";
@@ -127,7 +127,7 @@
                 
                 <!-- image crud -->
 
-                <div class="card m-3">
+                <div id="imgCrud" class="card m-3">
                     <div class="card-header">
                         <h4>Image CRUD - insert image in database</h4>
                     </div>
