@@ -5,8 +5,7 @@
    if(!isset($_SESSION['user_name'])){
       header('location: index.php');
    }
-   $sql = "SELECT * FROM `jobposts`";
-   $query = mysqli_query($conn, $sql);
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -97,7 +96,7 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                            <form action="" method="POST">
-                              <button class="dropdown-item" type="submit" name="logout" <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
+                              <button class="dropdown-item" type="submit" name="logout"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
                            </form>
                         </div>
                      </li>
@@ -107,13 +106,13 @@
                <!-- Begin Page Content -->
                <div class="container-fluid">
                   <!-- Page Heading -->
-                  <h5 class="mb-2 text-gray-800">Job Posts</h5>
+                  <h5 class="mb-2 text-gray-800">Partners</h5>
                   <!-- DataTales Example -->
                   <div class="card shadow">
                      <div class="card-header py-3 d-flex justify-content-between">
                         <div>
-                           <a href="addjobpost.php">
-                              <h6 class="font-weight-bold text-primary mt-2">Add New</h6>
+                           <a href="placementpartner.php">
+                              <h6 class="font-weight-bold text-primary mt-2 text-decoration-none">Add New partner</h6>
                            </a>
                         </div>
                      </div>
@@ -122,36 +121,52 @@
                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                               <thead>
                                  <tr>
-                                    <th>SL</th>
-                                    <th>Job Title</th>
-                                    <th colspan="2">Action</th>
+                                    <th class="col-3">ID.</th>
+                                    <th  class="col-3">Image</th>
+                                    <th class="col-3">Action</th>
                                  </tr>
                               </thead>
                               <tbody>
-                                 <?php $increment = 1 ?>
-                                 <?php foreach($query as $item){ ?>
+                              <?php $increment = 1 ?>
+                              <?php 
+                                $sql = "SELECT * FROM `partners` where id = '24' ";
+                                $query = mysqli_query($conn, $sql);
+                                $result = mysqli_fetch_assoc($query);
+                                print_r($result);
+                                echo $result['image'];
+
+                                if(mysqli_num_rows($query)> 0)
+                                {
+                                 foreach( $query as $item)
+                                 {
+                              ?>
+
                                  <tr>
-                                    <td><?= $increment++ ?></td>
-                                    <td><?= $item['post_title'] ?></td>
+                                    <td><?php echo $increment++ ?></td>
+                                    <td>
+                                       <img src="<?php echo "upload/partners" . $item['image']; ?>" width="70" height="70" alt="image">
+                                    </td>
                                     <td>
                                        <form action="" method="POST" class="d-inline-block ms-1">
                                           <input type="hidden" name="status_id" value="<?= $item['id'] ?>">
-                                          <button type="submit" name="status" class="<?php echo $item['status'] == '0' ? "bg-success" : "bg-danger" ?> text-white border-0">
-                                          <?php echo $item['status'] == '0' ? "Active" : "Deactive" ?>
+                                          <button type="submit" name="status" class="text-white border-0">
                                           </button>
                                        </form>
-                                       <a href="updatejobpost.php?id=<?= $item['id'] ?>" style="text-decoration: none" class="ms-1">
+                                       <a href="partnersUpdate.php?id=<?php echo $item['id'] ?>" class="ms-1 text-decoration-none">
                                           <i class="fa-regular fa-pen-to-square"></i>
                                        </a>
                                        <form action="" method="POST" class="d-inline-block ms-1" onsubmit="">
-                                          <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
+                                          <input type="hidden" name="delete_id" value="">
                                           <button type="submit" name="delete" class="bg-white border-0">
                                              <i class="fa-solid fa-trash text-danger"></i>
                                           </button>
                                        </form>
                                     </td>
                                  </tr>
-                                 <?php } ?>
+                                 <?php
+                                }
+                               }
+                               ?>
                               </tbody>
                            </table>
                         </div>

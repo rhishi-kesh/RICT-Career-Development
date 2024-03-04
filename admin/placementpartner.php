@@ -18,7 +18,7 @@
         $query = mysqli_query($conn, $sql);
         if($query){
             move_uploaded_file($tmp_name,"upload/partners".$file_name);
-            header('location: placementpartner.php');
+            header('location: partners.php');
         }else{
             $failed_data = "data instert faild";
         }
@@ -71,7 +71,7 @@
             <hr class="sidebar-divider">
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="placementpartner.php"> <span>Partners</span></a>
+                <a class="nav-link" href="partners.php"> <span>Partners</span></a>
                 <!-- Divider -->
             </li>
                 <hr class="sidebar-divider d-none d-md-block">
@@ -134,6 +134,7 @@
                         <h4>Image CRUD - insert image in database</h4>
                     </div>
                     <div class="card-body m-5">
+                        
                         <form action="placementpartner.php" method="POST" enctype="multipart/form-data">
                             <div class="form-group  mb-3">
                                 <label  class="form-label" for="image">Partners Image</label>
@@ -141,6 +142,7 @@
                             </div>
                             <div class="form-group  mb-3">
                                 <button type="submit" name="save_image" class="btn btn-primary">Save Image</button>
+                                <a href="partners.php" class="btn btn-secondary ">Back</a>
                             </div>
                         </form>
                     </div>

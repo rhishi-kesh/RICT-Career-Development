@@ -131,14 +131,11 @@
         </div>
       </div>
       <div class="row justify-content-center">
-		<?php
-			if(!empty($query)){
-				foreach($query as $item){
-		?>
+		
         <div class="col-12 col-md-4">
           <div class="row justify-content-center">
             <div class="col-4 align-self-center text-center mt-4 mt-md-0">
-              <img src="assets/images/1.png<?= $item['save_imagae']?>" alt="" class="img-fluid" />
+              <img src="assets/images/1.png" alt="" class="img-fluid" />
             </div>
             <div class="col-4 align-self-center text-center mt-4 mt-md-0">
               <img src="assets/images/2.png" alt="" class="img-fluid" />
@@ -148,12 +145,6 @@
             </div>
           </div> 
         </div>
-		<?php
-			}
-		}else{
-			echo "No found data";
-		}
-		?>
       </div>
     </div>
   </section>
