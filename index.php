@@ -45,11 +45,7 @@
   <section class="career-header">
     <div class="banner col-lg-8 col-md-4">
       <div class="content">
-        <h1 class="display-5 fw-bold">Career Development</h1>
-        <p class="lead">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas dolor atque voluptate? Dignissimos rerum itaque veritatis quisquam autem dolorem ipsa magnam quia ipsam unde corporis, quaequi, voluptatibus reiciendis sed.
-        </p>
-        <a href="https://rayhansict.com/">Our Company</a>
+        <img src="assets/images/careerpage.png" alt="">
       </div>
     </div>
   </section>

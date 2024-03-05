@@ -2,46 +2,52 @@
    include 'config.php';
    session_start();
    ob_start();
-   if(!isset($_SESSION['user_name'])){
-      header('location: index.php');
-   }
 
-   $id = $_GET['id'];
-   $sql = "SELECT * FROM `partners` WHERE `id` = '$id'";
-   $query = mysqli_query($conn, $sql);
-   $result = mysqli_fetch_assoc($query);
+   if(isset($_POST['submit']))
+   {
+      $img_id = $_POST['img_id'];
+      $new_image= $_FILES['update_img']['name'];
+      $old_image = $_POST['old_image'];
 
-   if(isset($_POST['save_image'])){
-    $id = $_GET['id'];
-  
-    $file_name= $_FILES['image']['name'];
-    $random = rand(000,999);
-    $random = str_pad($random, 3, '0', STR_PAD_LEFT);
-    $file_name = $random.$file_name;
-    $tmp_name= $_FILES['image']['tmp_name'];
-
-    $desination = "upload/partners".$result['image'];
-
-      if(!empty($file_name)){
-        $sql = "UPDATE `partners` SET `image`='$file_name' WHERE `id` = '$id'";
-        $query = mysqli_query($conn, $sql);
-        if($query){
-            unlink($desination);
-            move_uploaded_file($tmp_name,"upload/partners".$file_name);
-            header('location: partnersedit.php');
-        }else{
-            $failed_data = "data update faild";
-        }
-      }else{
-        $sql = "UPDATE `partners` SET `image`='$job_description' WHERE `id` = '$id'";
-        $query = mysqli_query($conn, $sql);
-        if($query){
-            header('location: partnersedit.php');
-        }else{
-            $failed_data = "data update faild";
-        }
+      if($new_image != '')
+      {
+         $update_file = $_FILES['update_img']['name'];
+      }
+      else
+      {
+         $update_file = $old_image;
+      }
+      if ($_FILES['update_img']['name'] != '')
+      {
+         if (file_exists("upload/partners/" . $_FILES['update_img']['name']))
+         {
+            $filename = $_FILES['update_img']['name'];
+            $_SESSION['status'] = "Image already exists". $filename;
+            header('location: partners.php');
+         }
+      }
+      else
+      {
+         $query = "UPDATE partners SET image='$update_file' WHERE id='$id' ";
+         $query_run = mysqli_query($conn, $query);
+         if($query_run)
+         {
+            if($_FILES['update_img']['name']  !='')
+            {
+               move_uploaded_file($_FILES["update_img"]["tem_name"], "upload/partners".$_FILES['update_img']['name']);
+               unlink("upload/partners.$old_image ");
+            }
+            $_SESSION['status'] = "update successfully";
+            header("location: partners.php");
+         }
+         else
+         {
+            $_SESSION['status'] = " Not update successfully";
+            header("location: partners.php");
+         }
       }
   }
+
 ?>
 
 <!DOCTYPE html>
@@ -146,33 +152,36 @@
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-8">
                             <h2>Update Job Post</h2>
+                        <?php 
+                           $id = $_GET['id'];
+                           $showquery = "SELECT * FROM partners WHERE id={$id} ";
+                           $showdata = mysqli_query($conn, $showquery);
+                           $arrdata = mysqli_fetch_array($showdata);
 
-                            <?php
-                                $sql = "SELECT * FROM `partners`";
-                                $query = mysqli_query($conn, $sql);
-
-                                if(mysqli_num_rows($query)> 0)
-                                {
-                                 foreach( $query as $item)
-                                 {
-                              ?>
+                           // if (isset($_POST['save_image'])) {
+                           //    $image = $_FILES['image']['name'];
+                        
+                           //    $sql = "UPDATE * FROM `partners` SET image='$image'";
+                           //    $query = mysqli_query($conn, $sql);
+                           // }
+                        ?>
+                        
                             <form action="partnersUpdate.php" method="POST" enctype="multipart/form-data">
+                            <div class="form-group  mb-3">
+                                    <input type="hidden" name="img_id" value="<?php echo $item['id']; ?>" class="form-control">
+                                </div>
                                 <div class="form-outline py-5 mb-4">
                                     <label class="form-label" for="partnerimg">Update Image</label>
-                                    <input type="file" id="partnerimg" value="<?php echo $item['image']?>" class="form-control" name="partnerimg"/>
+                                    <input type="file" name="update_img" class="form-control">
+                                    <input type="hidden" name="old_image"  value="<?php  $arrdata['image']?>" class="form-control" name="partnerimg"/>
 
-                                    <input type="hidden" name="image_old" value="<?php echo $item['image']; ?>" class="form-control">
                                     <td>
-                                       <img src="<?php echo "upload/partners" . $item['image']; ?>" width="70" height="70" alt="image">
+                                       <img src="<?php echo "upload/partners/" .  $arrdata['image']; ?>" width="70" height="70" alt="image">
                                     </td>
                                 </div>
                                 <button type="submit" class="btn btn-primary mb-4" name="submit">Edit Post</button>
                                 <a href="partners.php" class="btn btn-secondary mb-4">Back</a>
                             </form>
-                            <?php
-                                }
-                               }
-                               ?>
                         </div>
                     </div>
                </div>
