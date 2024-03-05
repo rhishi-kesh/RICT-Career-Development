@@ -44,7 +44,7 @@
   <!-- first banner section -->
   <section class="career-header">
     <div class="banner col-lg-8 col-md-4">
-      <div class="content">
+      <div class="image">
         <img src="assets/images/careerpage.png" alt="">
       </div>
     </div>
@@ -52,64 +52,17 @@
   <!-- first banner section end-->
 
   <!-- Brands -->
-  <section class="career-process py-2">
-    <div class="container">
-      <div class="row" id="career-header">
-        <div class="col-12 col-md-6 mt-4 order-1" id="card">
-          <div class="card p-3">
-            <div class="goal">
+  <section class="career-process py-0">
+    <div class="container justify-content-center ourGoal">
+      <div class="row justify-content-center" id="career-header">
+        <div class="col-12 col-md-6 mt-4 order-1 text-center">
               <h4>Our Goal</h4>
-              <div>
-                <img src="assets/images/career.png" alt="" id="img" />
+              <div class="teamlogo">
+                <img src="assets/images/JoinOurTeam.png" alt="" id="img" />
               </div>
-            </div>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto iure quibusdam autem rem, porro maxime.
-              Aut ab quia deserunt. Nemo!
+            <p class="fs-1">
+            We want to create a friendly environment for our employees where he/she will get the environment to work .
             </p>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 mt-4 order-3">
-          <div class="card p-3">
-            <div class="goal">
-              <h4> Benefits of Career Development</h4>
-              <div>
-                <img src="assets/images/career.png" alt="" id="img" />
-              </div>
-            </div>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto iure quibusdam autem rem, porro maxime.
-              Aut ab quia deserunt. Nemo!
-            </p>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 mt-4 order-4">
-          <div class="card p-3">
-            <div class="goal">
-              <h4>Internship Opportunity</h4>
-              <div>
-                <img src="assets/images/career.png" alt="" id="img" />
-              </div>
-            </div>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto iure quibusdam autem rem, porro maxime.
-              Aut ab quia deserunt. Nemo!
-            </p>
-          </div>
-        </div>
-        <div class="col-12 col-md-6 mt-4 order-2">
-          <div class="card p-3">
-            <div class="goal">
-              <h4>Our Process</h4>
-              <div>
-                <img src="assets/images/career.png" alt="" id="img" />
-              </div>
-            </div>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto iure quibusdam autem rem, porro maxime.
-              Aut ab quia deserunt. Nemo!
-            </p>
-          </div>
         </div>
       </div>
     </div>
@@ -154,9 +107,9 @@
             <h2 class="text-uppercase fs-1 mb-4 text-center">Send us your CV</h2>
           </div>
         </div>
-        <div class="d-flex justify-content-start">
+        <div class="d-flex justify-content-start cv">
           <div class="image-holder"></div>
-          <form method="post">
+          <form class="form" method="post">
             <div class="form-floating mb-3">
                 <input type="text" class="form-control shadow-none" id="name"placeholder="Name">
                 <label for="name">Name</label>

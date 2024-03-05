@@ -63,48 +63,41 @@ h2{
 
 /* career header first section */
 
-
-
-/* card */
-
-#img{
-	width: 80px;
+.banner img{
+	width: auto;
+	height: auto;
 }
-.goal{
+.ourGoal{
+	padding: 0;
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: center;
+	height: 80vh;
+	background-color: #f1f1f1;
 }
-.goal h4{
-	color: var(--blue);
+.ourGoal p{
+	font-size: 1.3rem;
+	font-weight: bolder;
+	font-style: italic;
 }
-.card{
-	border: none;
-	border-left: 6px solid var(--blue);
-	background-color: #F8F9FA;
-	box-shadow: none;
-	transition: 0.5s;
+.ourGoal h4{
+	font-size: 3.3rem;
+	font-weight: bolder;
+	font-style: italic;
 }
-.card:hover{
-	border-left: 6px solid var(--orange);
-	box-shadow: 1px 1px 8px rgba(80, 80, 80,0.3);
+.ourGoal h4:hover{
+	text-decoration: underline;
+	color: var(--orange);
+	transition: 0.9s ease;
 }
-/* future-career start */
-.future-career1{
-	margin-top: 100px;
+.teamlogo{
+	width: auto;
+	height: 5rem;
 }
-.future-career .join{
-	padding-bottom: 15px;
-}
-.future-career h1{
-	color: var(--blue);
-	font-weight: 600;
-}
-
 /* create an account  */
 
 .contact-form .image-holder {
-	background:url('../images/job.jpg');
+	background:url('../images/cv.png');
 	background-size:cover;
 	width: 50%;
 	height: 500px;
@@ -130,6 +123,7 @@ h2{
 	transition: 0.5s;
 }
 #submit:hover{
+	color: var(--white);
 	background-color: var(--orange);
 }
 #submit:active{
@@ -168,5 +162,19 @@ h2{
 		width: 400px;
 		height: 20vh;
 		margin-bottom: 7px;
+	}
+}
+@media screen and (max-width:768px){
+	.cv{
+		background-size:cover;
+		width: auto;
+		height: 500px;
+	}
+
+	.image-holder{
+		display: none;
+	}
+	.contact-form{
+		width: 100%;
 	}
 }
