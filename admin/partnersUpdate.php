@@ -2,12 +2,53 @@
    include 'config.php';
    session_start();
    ob_start();
-   if(!isset($_SESSION['user_name'])){
-      header('location: index.php');
-   }
-   $sql = "SELECT * FROM `jobposts`";
-   $query = mysqli_query($conn, $sql);
+
+   if(isset($_POST['submit']))
+   {
+      $img_id = $_POST['img_id'];
+      $new_image= $_FILES['update_img']['name'];
+      $old_image = $_POST['old_image'];
+
+      if($new_image != '')
+      {
+         $update_file = $_FILES['update_img']['name'];
+      }
+      else
+      {
+         $update_file = $old_image;
+      }
+      if ($_FILES['update_img']['name'] != '')
+      {
+         if (file_exists("upload/partners/" . $_FILES['update_img']['name']))
+         {
+            $filename = $_FILES['update_img']['name'];
+            $_SESSION['status'] = "Image already exists". $filename;
+            header('location: partners.php');
+         }
+      }
+      else
+      {
+         $query = "UPDATE partners SET image='$update_file' WHERE id='$id' ";
+         $query_run = mysqli_query($conn, $query);
+         if($query_run)
+         {
+            if($_FILES['update_img']['name']  !='')
+            {
+               move_uploaded_file($_FILES["update_img"]["tem_name"], "upload/partners".$_FILES['update_img']['name']);
+               unlink("upload/partners.$old_image ");
+            }
+            $_SESSION['status'] = "update successfully";
+            header("location: partners.php");
+         }
+         else
+         {
+            $_SESSION['status'] = " Not update successfully";
+            header("location: partners.php");
+         }
+      }
+  }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -37,7 +78,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
             <!-- Nav Item - Dashboard -->
-            <hr class="sidebar-divider">
             <li class="nav-item">
                <a class="nav-link" href="main.php"> <span>Job Posts</span></a>
             </li>
@@ -47,10 +87,12 @@
             <li class="nav-item">
                <a class="nav-link" href="application.php"> <span>Applications</span></a>
             </li>
-            <hr class="sidebar-divider">
+             <!-- Divider -->
+             <hr class="sidebar-divider">
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-               <a class="nav-link" href="partners.php"> <span>Partners</span></a>
+                <a class="nav-link" href="partners.php"> <span>Partners</span></a>
+                <!-- Divider -->
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -106,57 +148,32 @@
                <!-- End header -->
                <!-- Begin Page Content -->
                <div class="container-fluid">
-                  <!-- Page Heading -->
-                  <h5 class="mb-2 text-gray-800">Job Posts</h5>
-                  <!-- DataTales Example -->
-                  <div class="card shadow">
-                     <div class="card-header py-3 d-flex justify-content-between">
-                        <div>
-                           <a href="addjobpost.php">
-                              <h6 class="font-weight-bold text-primary mt-2">Add New</h6>
-                           </a>
-                        </div>
-                     </div>
-                     <div class="card-body">
-                        <div class="table-responsive">
-                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                              <thead>
-                                 <tr>
-                                    <th>SL</th>
-                                    <th>Job Title</th>
-                                    <th colspan="2">Action</th>
-                                 </tr>
-                              </thead>
-                              <tbody>
-                                 <?php $increment = 1 ?>
-                                 <?php foreach($query as $item){ ?>
-                                 <tr>
-                                    <td><?= $increment++ ?></td>
-                                    <td><?= $item['post_title'] ?></td>
+                    <div class="row justify-content-center">
+                        <div class="col-12 col-md-8">
+                            <h2>Update Job Post</h2>
+                        <?php 
+                           $id = $_GET['id'];
+                           $showquery = "SELECT * FROM partners WHERE id={$id} ";
+                           $showdata = mysqli_query($conn, $showquery);
+                           $arrdata = mysqli_fetch_array($showdata);
+                        ?>
+                            <form action="partnersUpdate.php" method="POST" enctype="multipart/form-data">
+                            <div class="form-group  mb-3">
+                                    <input type="hidden" name="img_id" value="<?php echo $item['id']; ?>" class="form-control">
+                                </div>
+                                <div class="form-outline py-5 mb-4">
+                                    <label class="form-label" for="partnerimg">Update Image</label>
+                                    <input type="file" name="update_img" class="form-control">
+                                    <input type="hidden" name="old_image"  value="<?php  $arrdata['image']?>" class="form-control" name="partnerimg"/>
                                     <td>
-                                       <form action="" method="POST" class="d-inline-block ms-1">
-                                          <input type="hidden" name="status_id" value="<?= $item['id'] ?>">
-                                          <button type="submit" name="status" class="<?php echo $item['status'] == '0' ? "bg-success" : "bg-danger" ?> text-white border-0">
-                                          <?php echo $item['status'] == '0' ? "Active" : "Deactive" ?>
-                                          </button>
-                                       </form>
-                                       <a href="updatejobpost.php?id=<?= $item['id'] ?>" style="text-decoration: none" class="ms-1">
-                                          <i class="fa-regular fa-pen-to-square"></i>
-                                       </a>
-                                       <form action="" method="POST" class="d-inline-block ms-1" onsubmit="">
-                                          <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
-                                          <button type="submit" name="delete" class="bg-white border-0">
-                                             <i class="fa-solid fa-trash text-danger"></i>
-                                          </button>
-                                       </form>
+                                       <img src="<?php echo "upload/partners/" .  $arrdata['image']; ?>" width="70" height="70" alt="image">
                                     </td>
-                                 </tr>
-                                 <?php } ?>
-                              </tbody>
-                           </table>
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-4" name="submit">Edit Post</button>
+                                <a href="partners.php" class="btn btn-secondary mb-4">Back</a>
+                            </form>
                         </div>
-                     </div>
-                  </div>
+                    </div>
                </div>
                <!-- /.container-fluid -->
             </div>
@@ -183,67 +200,17 @@
       <script src="vendor/js/sb-admin-2.min.js"></script>
       <!-- Page level plugins -->
       <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-      <script src="//cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+      <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
       <script>
-         CKEDITOR.replace( 'blog_body' );
+         CKEDITOR.replace( 'job_description' );
       </script>
    </body>
 </html>
 <?php 
-
    if(isset($_POST['logout'])){
       session_unset();
       session_destroy();
       header ("location: index.php");
       exit();
-   }
-
-   if(isset($_POST['delete'])){
-      $id = $_POST['delete_id'];
-
-      $sql = "SELECT * FROM `jobposts` WHERE id = '$id'";
-      $query = mysqli_query($conn, $sql);
-      $result = mysqli_fetch_assoc($query);
-      $destination = "upload/".$result['company_logo'];
-
-      $sql2 = "SELECT * FROM `applications` WHERE `job_post_id` = '$id'";
-      $query2 = mysqli_query($conn, $sql2);
-      $rows = mysqli_num_rows($query2);
-      if($rows){
-         ?>
-            <script>
-               alert('OK')
-            </script>
-         <?php
-      }else{
-         $delete_sql = "DELETE FROM `jobposts` WHERE id = $id";
-         $result = mysqli_query($conn, $delete_sql);
-         if($result){
-            unlink($destination);
-            header("Location: main.php");
-         }
-      }
-      
-   }
-
-   if(isset($_POST['status'])){
-      $id = $_POST['status_id'];
-
-      $sql = "SELECT * FROM `jobposts` WHERE `id` = '$id'";
-      $query = mysqli_query($conn, $sql);
-      $result = mysqli_fetch_assoc($query);
-      if($result['status'] == 0){
-         $sql = "UPDATE `jobposts` SET `status`='1' WHERE `id` = '$id'";
-         $query = mysqli_query($conn, $sql);
-         if($query){
-            header("Location: main.php");
-         }
-      }else{
-         $sql = "UPDATE `jobposts` SET `status`='0' WHERE `id` = '$id'";
-         $query = mysqli_query($conn, $sql);
-         if($query){
-            header("Location: main.php");
-         }
-      }
    }
 ?>

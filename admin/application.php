@@ -49,6 +49,12 @@
                <a class="nav-link" href="application.php"> <span>Applications</span></a>
             </li>
             <!-- Divider -->
+            <hr class="sidebar-divider">
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+               <a class="nav-link" href="partners.php"> <span>Partners</span></a>
+            </li>
+            <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

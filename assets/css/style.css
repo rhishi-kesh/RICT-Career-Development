@@ -1,0 +1,162 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+	--orange: #E16127;
+	--blue: #403D42;
+	--white: ##FFFEFE ;
+	--black: #403D42;
+}
+h2{
+	color: var(--blue);
+}
+#jobs .job-item a{
+	display: block;
+	color: var(--black);
+	text-decoration: none;
+	margin-top: 10px;
+}
+.demo a{
+	font-weight: 700;
+}
+.btn-primary{
+	background: var(--blue) !important;
+	border: none !important;
+	color: var(--white) !important;
+}
+.bg-primary{
+	background: var(--blue) !important;
+	color: var(--white) !important;
+}
+.hero h1{
+	color: var(--blue);
+}
+.text-orange{
+	color: var(--orange);
+}
+
+/* navBar */
+
+#navbtn{
+	color:var(--blue);
+	font-weight: 700;
+	transition: 0.4s ease;
+	position: relative;
+	text-decoration: none;
+	transition: 0.5s;
+}
+#navbtn::before{
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 0%;
+	height: 3px;
+	background: var(--orange);
+	transition: 0.5s;
+}
+#navbtn:hover::before{
+	width: 100%;
+}
+
+/* career header first section */
+
+.career-header img{
+	width: 100%;
+	height: auto;
+}
+.ourGoal{
+	margin-top: 10px;
+	width: auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 60vh;
+}
+.ourGoal p{
+	font-size: 20px;
+	font-style: italic;
+}
+.ourGoal h4{
+	font-size: 2.3rem;
+	font-weight: bolder;
+	font-style: italic;
+}
+.ourGoal h4:hover{
+	text-decoration: underline;
+	color: var(--orange);
+	transition: 0.9s ease;
+}
+.teamlogo{
+	width: auto;
+	height: 5rem;
+}
+/* create an account  */
+
+.contact-form .image-holder {
+	background:url('../images/cv.png');
+	background-size:cover;
+	width: 50%;
+	height: 500px;
+}
+.contact-form form {
+	width:50%;
+	height: 500px;
+	background: #F8F9FA;
+	padding: 20px 20px;
+}
+.contact-form form h2 {
+	font-size:24px;
+	line-height:1.5;
+	margin-bottom:30px;
+}
+.contact-form form input:focus{
+	border: 1px solid var(--orange);
+}
+.submit{
+	color: white;
+}
+#submit{
+	background: var(--blue);
+	font-weight: 800;
+	transition: 0.5s;
+}
+#submit:hover{
+	background-color: var(--orange);
+}
+#submit:active{
+	background-color: var(--orange);
+}
+
+@media screen and (max-width: 767px){
+	.ourGoal{
+		margin-top: 2px;
+		height: 30vh;
+		font-size: 20px;
+	}
+	#navbtn{
+		margin: 5px 0;
+		display: inline-block;
+	}
+		/* contact cv form */
+	.cv form{
+		background-size:cover;
+		width: 90%;
+		margin: auto;
+	}
+	.image-holder{
+		display: none;
+	}
+	.contact-form{
+		width: 100%;
+	}
+}
+@media screen and (max-width:575px){
+  .banner{
+	width: 50%;
+	height: auto;
+  }
+
+}
