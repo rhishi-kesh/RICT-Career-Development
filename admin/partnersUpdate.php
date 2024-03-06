@@ -47,7 +47,6 @@
          }
       }
   }
-
 ?>
 
 <!DOCTYPE html>
@@ -157,15 +156,7 @@
                            $showquery = "SELECT * FROM partners WHERE id={$id} ";
                            $showdata = mysqli_query($conn, $showquery);
                            $arrdata = mysqli_fetch_array($showdata);
-
-                           // if (isset($_POST['save_image'])) {
-                           //    $image = $_FILES['image']['name'];
-                        
-                           //    $sql = "UPDATE * FROM `partners` SET image='$image'";
-                           //    $query = mysqli_query($conn, $sql);
-                           // }
                         ?>
-                        
                             <form action="partnersUpdate.php" method="POST" enctype="multipart/form-data">
                             <div class="form-group  mb-3">
                                     <input type="hidden" name="img_id" value="<?php echo $item['id']; ?>" class="form-control">
@@ -174,7 +165,6 @@
                                     <label class="form-label" for="partnerimg">Update Image</label>
                                     <input type="file" name="update_img" class="form-control">
                                     <input type="hidden" name="old_image"  value="<?php  $arrdata['image']?>" class="form-control" name="partnerimg"/>
-
                                     <td>
                                        <img src="<?php echo "upload/partners/" .  $arrdata['image']; ?>" width="70" height="70" alt="image">
                                     </td>
@@ -217,12 +207,10 @@
    </body>
 </html>
 <?php 
-
    if(isset($_POST['logout'])){
       session_unset();
       session_destroy();
       header ("location: index.php");
       exit();
    }
-
 ?>

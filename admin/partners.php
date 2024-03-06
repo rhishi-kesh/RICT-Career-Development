@@ -5,7 +5,6 @@ ob_start();
 if (!isset($_SESSION['user_name'])) {
    header('location: index.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -143,40 +142,36 @@ if (!isset($_SESSION['user_name'])) {
                                  unset($_SESSION['status']);
                               }
                               ?>
-                             
-
                               <?php $increment = 1 ?>
                               <?php
                               $sql = "SELECT * FROM `partners`";
                               $query = mysqli_query($conn, $sql);
                               $result = mysqli_fetch_assoc($query);
-
                               if (mysqli_num_rows($query) > 0) {
                                  foreach ($query as $item) {
                               ?>
-
-                                    <tr>
-                                       <td><?php echo $increment++ ?></td>
-                                       <td>
-                                          <img src="<?php echo "upload/partners/" . $item['image']; ?>" width="70" height="70" alt="image">
-                                       </td>
-                                       <td>
-                                          <form action="" method="POST" class="d-inline-block ms-1">
-                                             <input type="hidden" name="status_id" value="<?= $item['id'] ?>">
-                                             <button type="submit" name="status" class="text-white border-0">
-                                             </button>
-                                          </form>
-                                          <a href="partnersUpdate.php?id=<?php echo $item['id'] ?>" class="ms-1 text-decoration-none">
-                                             <i class="fa-regular fa-pen-to-square"></i>
-                                          </a>
-                                          <form action="" method="POST" class="d-inline-block ms-1" onsubmit="">
-                                             <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
-                                             <button type="submit" name="delete" class="bg-white border-0">
-                                                <i class="fa-solid fa-trash text-danger"></i>
-                                             </button>
-                                          </form>
-                                       </td>
-                                    </tr>
+                              <tr>
+                                 <td><?php echo $increment++ ?></td>
+                                 <td>
+                                    <img src="<?php echo "upload/partners/" . $item['image']; ?>" width="70" height="70" alt="image">
+                                 </td>
+                                 <td>
+                                    <form action="" method="POST" class="d-inline-block ms-1">
+                                       <input type="hidden" name="status_id" value="<?= $item['id'] ?>">
+                                       <button type="submit" name="status" class="text-white border-0">
+                                       </button>
+                                    </form>
+                                    <a href="partnersUpdate.php?id=<?php echo $item['id'] ?>" class="ms-1 text-decoration-none">
+                                       <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+                                    <form action="" method="POST" class="d-inline-block ms-1" onsubmit="">
+                                       <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
+                                       <button type="submit" name="delete" class="bg-white border-0">
+                                          <i class="fa-solid fa-trash text-danger"></i>
+                                       </button>
+                                    </form>
+                                 </td>
+                              </tr>
                               <?php
                                  }
                               }
