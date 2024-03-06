@@ -63,25 +63,24 @@ h2{
 
 /* career header first section */
 
-.banner img{
-	width: auto;
+.career-header img{
+	width: 100%;
 	height: auto;
 }
 .ourGoal{
-	padding: 0;
+	margin-top: 10px;
+	width: auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 80vh;
-	background-color: #f1f1f1;
+	height: 60vh;
 }
 .ourGoal p{
-	font-size: 1.3rem;
-	font-weight: bolder;
+	font-size: 20px;
 	font-style: italic;
 }
 .ourGoal h4{
-	font-size: 3.3rem;
+	font-size: 2.3rem;
 	font-weight: bolder;
 	font-style: italic;
 }
@@ -116,14 +115,15 @@ h2{
 .contact-form form input:focus{
 	border: 1px solid var(--orange);
 }
+.submit{
+	color: white;
+}
 #submit{
 	background: var(--blue);
-	color: var(--white);
 	font-weight: 800;
 	transition: 0.5s;
 }
 #submit:hover{
-	color: var(--white);
 	background-color: var(--orange);
 }
 #submit:active{
@@ -131,50 +131,32 @@ h2{
 }
 
 @media screen and (max-width: 767px){
-	.grid-container{
-		display: block;
-	}
-	.img{
-		width: 500px;
-		height: 20vh;
-		margin-bottom: 10px;
-	}
-	.img2{
-		width: 500px;
-		height: 20vh;
-		margin-bottom: 10px;
+	.ourGoal{
+		margin-top: 2px;
+		height: 30vh;
+		font-size: 20px;
 	}
 	#navbtn{
 		margin: 5px 0;
 		display: inline-block;
 	}
-}
-@media screen and (max-width:575px){
-    .grid-container{
-		display: block;
-	}
-	.img{
-		width: 400px;
-		height: 20vh;
-		margin-bottom: 7px;
-	}
-	.img2{
-		width: 400px;
-		height: 20vh;
-		margin-bottom: 7px;
-	}
-}
-@media screen and (max-width:768px){
-	.cv{
+		/* contact cv form */
+	.cv form{
 		background-size:cover;
-		width: auto;
-		height: 500px;
+		width: 90%;
+		margin: auto;
 	}
-
 	.image-holder{
 		display: none;
 	}
 	.contact-form{
 		width: 100%;
 	}
+}
+@media screen and (max-width:575px){
+  .banner{
+	width: 50%;
+	height: auto;
+  }
+
 }

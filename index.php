@@ -17,7 +17,7 @@
 </head>
 <body>
 	<!-- nav -->
-<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
       <div class="d-flex align-items-center justify-content-center">
         <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" alt="" style="width: 70%" />
@@ -43,11 +43,7 @@
 
   <!-- first banner section -->
   <section class="career-header">
-    <div class="banner col-lg-8 col-md-4">
-      <div class="image">
-        <img src="assets/images/careerpage.png" alt="">
-      </div>
-    </div>
+    <img src="assets/images/careerpage.png" alt="">
   </section>
   <!-- first banner section end-->
 
@@ -58,7 +54,7 @@
         <div class="col-12 col-md-6 mt-4 order-1 text-center">
               <h4>Our Goal</h4>
               <div class="teamlogo">
-                <img src="assets/images/JoinOurTeam.png" alt="" id="img" />
+                <img src="assets/images/1.png" alt="" id="img" />
               </div>
             <p class="fs-1">
             We want to create a friendly environment for our employees where he/she will get the environment to work .
@@ -131,7 +127,7 @@
               <input type="file" class="form-control form-control-lg shadow-none" id="cv" />
             </div>
             <div class="form-group mt-5">
-              <button class="form-control form-control-lg text-uppercase shadow-none" id="submit" type="submit">Submit</button>
+              <button class="form-control form-control-lg text-uppercase shadow-none submit" id="submit" type="submit">Submit</button>
             </div>
           </form>
         </div>

@@ -47,7 +47,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center py-4">
-          <img id="jobicon" src="assets/images/jobicon.png" alt="" />
+          <img id="jobicon" src="assets/images/JoinOurTeam.png" alt="" />
           <h2 id="join" class="fw-bold">Join Our Team</h2>
           <p>
             Careers in creative fields usually involve imagination and
