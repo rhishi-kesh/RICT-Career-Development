@@ -1,216 +1,185 @@
 <?php
-   include 'config.php';
-   session_start();
-   ob_start();
+include 'config.php';
+session_start();
+ob_start();
 
-   if(isset($_POST['submit']))
-   {
-      $img_id = $_POST['img_id'];
-      $new_image= $_FILES['update_img']['name'];
-      $old_image = $_POST['old_image'];
-
-      if($new_image != '')
-      {
-         $update_file = $_FILES['update_img']['name'];
-      }
-      else
-      {
-         $update_file = $old_image;
-      }
-      if ($_FILES['update_img']['name'] != '')
-      {
-         if (file_exists("upload/partners/" . $_FILES['update_img']['name']))
-         {
-            $filename = $_FILES['update_img']['name'];
-            $_SESSION['status'] = "Image already exists". $filename;
-            header('location: partners.php');
-         }
-      }
-      else
-      {
-         $query = "UPDATE partners SET image='$update_file' WHERE id='$id' ";
-         $query_run = mysqli_query($conn, $query);
-         if($query_run)
-         {
-            if($_FILES['update_img']['name']  !='')
-            {
-               move_uploaded_file($_FILES["update_img"]["tem_name"], "upload/partners".$_FILES['update_img']['name']);
-               unlink("upload/partners.$old_image ");
-            }
-            $_SESSION['status'] = "update successfully";
-            header("location: partners.php");
-         }
-         else
-         {
-            $_SESSION['status'] = " Not update successfully";
-            header("location: partners.php");
-         }
-      }
-  }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <title>Admin - Dashboard</title>
-      <!-- Custom fonts for this template-->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-      <!-- Custom styles for this template-->
-      <link href="vendor/css/sb-admin-2.css" rel="stylesheet">
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-   </head>
-   <body id="page-top">
-      <!-- Page Wrapper -->
-      <div id="wrapper">
-         <!-- Sidebar -->
-         <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.php">
-               <div class="sidebar-brand-icon rotate-n-15"> <i class="fas fa-laugh-wink"></i> </div>
-               <div class="sidebar-brand-text mx-3">Dashbord</div>
-            </a>
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <meta name="description" content="">
+   <meta name="author" content="">
+   <title>Admin - Dashboard</title>
+   <!-- Custom fonts for this template-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+   <!-- Custom styles for this template-->
+   <link href="vendor/css/sb-admin-2.css" rel="stylesheet">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+
+<body id="page-top">
+   <!-- Page Wrapper -->
+   <div id="wrapper">
+      <!-- Sidebar -->
+      <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+         <!-- Sidebar - Brand -->
+         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="main.php">
+            <div class="sidebar-brand-icon rotate-n-15"> <i class="fas fa-laugh-wink"></i> </div>
+            <div class="sidebar-brand-text mx-3">Dashbord</div>
+         </a>
+         <!-- Divider -->
+         <hr class="sidebar-divider my-0">
+         <!-- Nav Item - Dashboard -->
+         <li class="nav-item">
+            <a class="nav-link" href="main.php"> <span>Job Posts</span></a>
+         </li>
+         <!-- Divider -->
+         <hr class="sidebar-divider">
+         <!-- Nav Item - Utilities Collapse Menu -->
+         <li class="nav-item">
+            <a class="nav-link" href="application.php"> <span>Applications</span></a>
+         </li>
+         <!-- Divider -->
+         <hr class="sidebar-divider">
+         <!-- Nav Item - Utilities Collapse Menu -->
+         <li class="nav-item">
+            <a class="nav-link" href="partners.php"> <span>Partners</span></a>
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-               <a class="nav-link" href="main.php"> <span>Job Posts</span></a>
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-               <a class="nav-link" href="application.php"> <span>Applications</span></a>
-            </li>
-             <!-- Divider -->
-             <hr class="sidebar-divider">
-            <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="partners.php"> <span>Partners</span></a>
-                <!-- Divider -->
-            </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-               <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-         </ul>
-         <!-- End of Sidebar -->
-         <!-- Content Wrapper -->
-         <div id="content-wrapper" class="d-flex flex-column">
-            <!-- Main Content -->
-            <div id="content">
-               <!-- Topbar -->
-               <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-                  <!-- Sidebar Toggle (Topbar) -->
-                  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"> <i class="fa fa-bars"></i> </button>
-                  <!-- Topbar Navbar -->
-                  <ul class="navbar-nav ml-auto">
-                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                     <li class="nav-item dropdown no-arrow d-sm-none">
-                        <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-search fa-fw"></i> </a>
-                        <!-- Dropdown - Messages -->
-                        <div class="dropdown-menu dropdown-menu-right p-3 shadow +animated--grow-in" aria-labelledby="searchDropdown">
-                           <form class="form-inline mr-auto w-100 navbar-search">
-                              <div class="input-group">
-                                 <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                                 <div class="input-group-append">
-                                    <button class="btn btn-primary" type="button"> <i class="fas fa-search fa-sm"></i> </button>
-                                 </div>
+         </li>
+         <!-- Divider -->
+         <hr class="sidebar-divider d-none d-md-block">
+         <!-- Sidebar Toggler (Sidebar) -->
+         <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+         </div>
+      </ul>
+      <!-- End of Sidebar -->
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+         <!-- Main Content -->
+         <div id="content">
+            <!-- Topbar -->
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+               <!-- Sidebar Toggle (Topbar) -->
+               <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"> <i class="fa fa-bars"></i> </button>
+               <!-- Topbar Navbar -->
+               <ul class="navbar-nav ml-auto">
+                  <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                  <li class="nav-item dropdown no-arrow d-sm-none">
+                     <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-search fa-fw"></i> </a>
+                     <!-- Dropdown - Messages -->
+                     <div class="dropdown-menu dropdown-menu-right p-3 shadow +animated--grow-in" aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                           <div class="input-group">
+                              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                              <div class="input-group-append">
+                                 <button class="btn btn-primary" type="button"> <i class="fas fa-search fa-sm"></i> </button>
                               </div>
-                           </form>
-                        </div>
-                     </li>
-                     <!-- Nav Item - User Information -->
-                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                        <?php
-                           if(isset($_SESSION['user_name'])){
+                           </div>
+                        </form>
+                     </div>
+                  </li>
+                  <!-- Nav Item - User Information -->
+                  <li class="nav-item dropdown no-arrow">
+                     <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                           <?php
+                           if (isset($_SESSION['user_name'])) {
                               echo $_SESSION['user_name'];
                            }
-                        ?>
+                           ?>
                         </span> <img class="img-profile rounded-circle" src="vendor/img/undraw_profile.svg"> </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                           <form action="" method="POST">
-                              <button class="dropdown-item" type="submit" name="logout" <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
+                     <!-- Dropdown - User Information -->
+                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                        <form action="" method="POST">
+                           <button class="dropdown-item" type="submit" name="logout" <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
+                        </form>
+                     </div>
+                  </li>
+               </ul>
+            </nav>
+            <!-- End header -->
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+               <div class="row justify-content-center">
+                  <div class="col-12 col-md-8">
+                     <h2>Update & Edit Job Post</h2>
+
+                     <?php
+                     $id = $_GET['id'];
+                     $showquery = "SELECT * FROM partners WHERE id='$id' ";
+                     $showdata = mysqli_query($conn, $showquery);
+
+                     if (mysqli_num_rows($showdata) > 0) 
+                     {
+                        foreach ($showdata as $item) {
+                     ?>
+                           <form action="code.php" method="POST" enctype="multipart/form-data">
+                             
+                              <input type="hidden" name="img_id" value="<?php echo $item['id']; ?>" class="form-control">
+                             
+                              <div class="form-outline py-5 mb-4">
+                                 <label class="form-label" for="partnerimg">Update Image</label>
+                                 <input type="file" name="image" class="form-control">
+                                 <input type="hidden" name="old_image" value="<?php echo $item['image'] ?>" class="form-control" name="partnerimg" />
+                                 <td>
+                                    <img src="<?php echo "upload/partners/".$item['image']; ?>" width="70" height="70" alt="image">
+                                 </td>
+                              </div>
+                              <button  name="update_img" type="submit" class="btn btn-primary mb-4">Update</button>
+                              <a href="partners.php" class="btn btn-secondary mb-4">Back</a>
                            </form>
-                        </div>
-                     </li>
-                  </ul>
-               </nav>
-               <!-- End header -->
-               <!-- Begin Page Content -->
-               <div class="container-fluid">
-                    <div class="row justify-content-center">
-                        <div class="col-12 col-md-8">
-                            <h2>Update Job Post</h2>
-                        <?php 
-                           $id = $_GET['id'];
-                           $showquery = "SELECT * FROM partners WHERE id={$id} ";
-                           $showdata = mysqli_query($conn, $showquery);
-                           $arrdata = mysqli_fetch_array($showdata);
-                        ?>
-                            <form action="partnersUpdate.php" method="POST" enctype="multipart/form-data">
-                            <div class="form-group  mb-3">
-                                    <input type="hidden" name="img_id" value="<?php echo $item['id']; ?>" class="form-control">
-                                </div>
-                                <div class="form-outline py-5 mb-4">
-                                    <label class="form-label" for="partnerimg">Update Image</label>
-                                    <input type="file" name="update_img" class="form-control">
-                                    <input type="hidden" name="old_image"  value="<?php  $arrdata['image']?>" class="form-control" name="partnerimg"/>
-                                    <td>
-                                       <img src="<?php echo "upload/partners/" .  $arrdata['image']; ?>" width="70" height="70" alt="image">
-                                    </td>
-                                </div>
-                                <button type="submit" class="btn btn-primary mb-4" name="submit">Edit Post</button>
-                                <a href="partners.php" class="btn btn-secondary mb-4">Back</a>
-                            </form>
-                        </div>
-                    </div>
+                     <?php
+                        }
+                     } else {
+                        echo "No record...!";
+                     }
+                     ?>
+                  </div>
                </div>
-               <!-- /.container-fluid -->
             </div>
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-               <div class="container my-auto">
-                  <div class="copyright text-center my-auto"> <span class="text-center">Copyright &copy; CREATIVE SHEBA LIMITED</span> </div>
-               </div>
-            </footer>
-            <!-- End of Footer -->
+            <!-- /.container-fluid -->
          </div>
-         <!-- End of Content Wrapper -->
+         <!-- Footer -->
+         <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+               <div class="copyright text-center my-auto"> <span class="text-center">Copyright &copy; CREATIVE SHEBA LIMITED</span> </div>
+            </div>
+         </footer>
+         <!-- End of Footer -->
       </div>
-      <!-- End of Page Wrapper -->
-      <!-- Scroll to Top Button-->
-      <a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i> </a>
-      <!-- Bootstrap core JavaScript-->
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-      <script src="vendor/jquery/jquery.min.js"></script>
-      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <!-- Core plugin JavaScript-->
-      <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-      <!-- Custom scripts for all pages-->
-      <script src="vendor/js/sb-admin-2.min.js"></script>
-      <!-- Page level plugins -->
-      <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-      <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
-      <script>
-         CKEDITOR.replace( 'job_description' );
-      </script>
-   </body>
+      <!-- End of Content Wrapper -->
+   </div>
+   <!-- End of Page Wrapper -->
+   <!-- Scroll to Top Button-->
+   <a class="scroll-to-top rounded" href="#page-top"> <i class="fas fa-angle-up"></i> </a>
+   <!-- Bootstrap core JavaScript-->
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   <script src="vendor/jquery/jquery.min.js"></script>
+   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <!-- Core plugin JavaScript-->
+   <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+   <!-- Custom scripts for all pages-->
+   <script src="vendor/js/sb-admin-2.min.js"></script>
+   <!-- Page level plugins -->
+   <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+   <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+   <script>
+      CKEDITOR.replace('job_description');
+   </script>
+</body>
+
 </html>
-<?php 
-   if(isset($_POST['logout'])){
-      session_unset();
-      session_destroy();
-      header ("location: index.php");
-      exit();
-   }
+<?php
+if (isset($_POST['logout'])) {
+   session_unset();
+   session_destroy();
+   header("location: index.php");
+   exit();
+}
 ?>

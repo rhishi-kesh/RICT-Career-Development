@@ -118,6 +118,12 @@ if (!isset($_SESSION['user_name'])) {
                      </div>
                   </div>
                   <div class="card-body">
+                     <?php
+                     $conn = mysqli_connect("localhost", "root", "", "rictjob_potal");
+                     $sql = "SELECT * FROM `partners`";
+                     $query = mysqli_query($conn, $sql);
+
+                     ?>
                      <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                            <thead>
@@ -129,49 +135,45 @@ if (!isset($_SESSION['user_name'])) {
                            </thead>
                            <tbody>
                               <?php
-                              if(isset($_SESSION['status']) && $_SESSION !='')
-                              {
-                                 ?>
+                              if (isset($_SESSION['status']) && $_SESSION != '') {
+                              ?>
                                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                 <strong>Hey!</strong><?php echo $_SESSION['status']; ?>
-                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                 </button>
-                              </div>
-                                 <?php
+                                    <strong>Hey!</strong><?php echo $_SESSION['status']; ?>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                       <span aria-hidden="true">&times;</span>
+                                    </button>
+                                 </div>
+                              <?php
                                  unset($_SESSION['status']);
                               }
                               ?>
-                              <?php $increment = 1 ?>
                               <?php
-                              $sql = "SELECT * FROM `partners`";
-                              $query = mysqli_query($conn, $sql);
-                              $result = mysqli_fetch_assoc($query);
                               if (mysqli_num_rows($query) > 0) {
                                  foreach ($query as $item) {
                               ?>
-                              <tr>
-                                 <td><?php echo $increment++ ?></td>
-                                 <td>
-                                    <img src="<?php echo "upload/partners/" . $item['image']; ?>" width="70" height="70" alt="image">
-                                 </td>
-                                 <td>
-                                    <form action="" method="POST" class="d-inline-block ms-1">
-                                       <input type="hidden" name="status_id" value="<?= $item['id'] ?>">
-                                       <button type="submit" name="status" class="text-white border-0">
-                                       </button>
-                                    </form>
-                                    <a href="partnersUpdate.php?id=<?php echo $item['id'] ?>" class="ms-1 text-decoration-none">
-                                       <i class="fa-regular fa-pen-to-square"></i>
-                                    </a>
-                                    <form action="" method="POST" class="d-inline-block ms-1" onsubmit="">
-                                       <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
-                                       <button type="submit" name="delete" class="bg-white border-0">
-                                          <i class="fa-solid fa-trash text-danger"></i>
-                                       </button>
-                                    </form>
-                                 </td>
-                              </tr>
+                                    <tr>
+                                       <td><?php echo $item['id'] ?></td>
+                                       <td>
+                                          <img src="<?php echo "upload/partners/" . $item['image']; ?>" width="70" height="70" alt="image">
+                                       </td>
+                                       <td>
+                                          <form action="" method="POST" class="d-inline-block ms-1">
+                                             <input type="hidden" name="status_id" value="<?= $item['id'] ?>">
+                                             <button type="submit" name="status" class="text-white border-0">
+                                             </button>
+                                          </form>
+                                          <a href="partnersUpdate.php?id=<?php echo $item['id'] ?>" class="ms-1 text-decoration-none">
+                                             <i class="fa-regular fa-pen-to-square"></i>
+                                          </a>
+                                          <form action="code.php" method="POST" class="d-inline-block ms-1" onsubmit="">
+                                             <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
+                                             <input type="hidden" name="del_stu_image" value="<?php echo $item['image']?>">
+                                             <button type="submit" name="delete_data" class="bg-white border-0">
+                                                <i class="fa-solid fa-trash text-danger"></i>
+                                             </button>
+                                          </form>
+                                       </td>
+                                    </tr>
                               <?php
                                  }
                               }
@@ -214,60 +216,3 @@ if (!isset($_SESSION['user_name'])) {
 </body>
 
 </html>
-<?php
-
-if (isset($_POST['logout'])) {
-   session_unset();
-   session_destroy();
-   header("location: index.php");
-   exit();
-}
-
-if (isset($_POST['delete'])) {
-   $id = $_POST['delete_id'];
-
-   $sql = "SELECT * FROM `partners` WHERE id = '$id'";
-   $query = mysqli_query($conn, $sql);
-   $result = mysqli_fetch_assoc($query);
-   $destination = "upload/partners/" . $result['company_logo'];
-
-   $sql2 = "SELECT * FROM `applications` WHERE `id` = '$id'";
-   $query2 = mysqli_query($conn, $sql2);
-   $rows = mysqli_num_rows($query2);
-   if ($rows) {
-?>
-      <script>
-         alert('OK')
-      </script>
-<?php
-   } else {
-      $delete_sql = "DELETE FROM `partners` WHERE id = $id";
-      $result = mysqli_query($conn, $delete_sql);
-      if ($result) {
-         unlink($destination);
-         header("Location: partners.php");
-      }
-   }
-}
-
-if (isset($_POST['status'])) {
-   $id = $_POST['status_id'];
-
-   $sql = "SELECT * FROM `jobposts` WHERE `id` = '$id'";
-   $query = mysqli_query($conn, $sql);
-   $result = mysqli_fetch_assoc($query);
-   if ($result['status'] == 0) {
-      $sql = "UPDATE `jobposts` SET `status`='1' WHERE `id` = '$id'";
-      $query = mysqli_query($conn, $sql);
-      if ($query) {
-         header("Location: main.php");
-      }
-   } else {
-      $sql = "UPDATE `jobposts` SET `status`='0' WHERE `id` = '$id'";
-      $query = mysqli_query($conn, $sql);
-      if ($query) {
-         header("Location: main.php");
-      }
-   }
-}
-?>
