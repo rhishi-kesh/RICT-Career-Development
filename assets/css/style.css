@@ -9,34 +9,6 @@
 	--white: ##FFFEFE ;
 	--black: #403D42;
 }
-h2{
-	color: var(--blue);
-}
-#jobs .job-item a{
-	display: block;
-	color: var(--black);
-	text-decoration: none;
-	margin-top: 10px;
-}
-.demo a{
-	font-weight: 700;
-}
-.btn-primary{
-	background: var(--blue) !important;
-	border: none !important;
-	color: var(--white) !important;
-}
-.bg-primary{
-	background: var(--blue) !important;
-	color: var(--white) !important;
-}
-.hero h1{
-	color: var(--blue);
-}
-.text-orange{
-	color: var(--orange);
-}
-
 /* navBar */
 
 #navbtn{
@@ -61,6 +33,36 @@ h2{
 	width: 100%;
 }
 
+h2{
+	color: var(--blue);
+}
+#jobs .job-item a{
+	display: block;
+	color: var(--black);
+	text-decoration: none;
+	margin-top: 10px;
+}
+.demo a{
+	font-weight: 700;
+}
+.btn-primary{
+	background: var(--blue) !important;
+	border: none !important;
+	color: white !important;
+}
+.bg-color{
+	background: var(--blue) !important;
+	color: var(--white) !important;
+}
+.hero h1{
+	color: var(--blue);
+}
+.text-orange{
+	color: var(--orange);
+}
+
+
+
 /* career header first section */
 .career-header img{
 	width: 100%;
@@ -70,6 +72,7 @@ h2{
 	border: none;
 	display: flex;
 	align-items: center;
+	box-shadow: 0px 0px 10px #c0bebe;
 	justify-content: center;
 }
 .ourGoal p{

@@ -1,7 +1,7 @@
 <?php
 
 include 'admin/config.php';
-$sql = "SELECT * FROM `partners` WHERE `id` = 0";
+$sql = "SELECT * FROM `partners`";
 $query = mysqli_query($conn, $sql);
 
 ?>
@@ -54,7 +54,7 @@ $query = mysqli_query($conn, $sql);
     <div class="container ourGoal">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <div class="card card_sty shadow p-3 mb-5 bg-body rounded">
+          <div class="card card_sty p-3 mb-5 bg-body rounded">
             <div>
               <img src="assets/images/1.png" alt="" id="img" />
             </div>
@@ -83,15 +83,19 @@ $query = mysqli_query($conn, $sql);
 
         <div class="col-12 col-md-4">
           <div class="row justify-content-center">
+            <?php
+            // if(mysqli_num_rows($query))
+            // {
+              foreach($query as $item)
+              {
+            ?>
             <div class="col-4 align-self-center text-center mt-4 mt-md-0">
-              <img src="assets/images/1.png" alt="" class="img-fluid" />
+              <img src="admin/upload/partners/<?php echo $item['image'] ?>" alt="" class="img-fluid" />
             </div>
-            <div class="col-4 align-self-center text-center mt-4 mt-md-0">
-              <img src="assets/images/2.png" alt="" class="img-fluid" />
-            </div>
-            <div class="col-4 align-self-center text-center mt-4 mt-md-0">
-              <img src="assets/images/3.png" alt="" class="img-fluid" />
-            </div>
+            <?php
+              }
+            // }
+            ?>
           </div>
         </div>
       </div>
@@ -140,7 +144,7 @@ $query = mysqli_query($conn, $sql);
   <!-- contact form end -->
 
   <!-- footer-start -->
-  <footer class="py-2 bg-primary">
+  <footer class="py-2 bg-color">
     <div class="container">
       <div class="row">
         <div class="col-12">
