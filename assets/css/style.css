@@ -62,37 +62,30 @@ h2{
 }
 
 /* career header first section */
-
 .career-header img{
 	width: 100%;
 	height: auto;
 }
-.ourGoal{
-	margin-top: 10px;
-	width: auto;
+.card_sty{
+	border: none;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 60vh;
 }
 .ourGoal p{
-	font-size: 20px;
-	font-style: italic;
+	font-size: 18px;
+	text-align: center;
+	letter-spacing: 3px;
 }
 .ourGoal h4{
 	font-size: 2.3rem;
 	font-weight: bolder;
 	font-style: italic;
 }
-.ourGoal h4:hover{
-	text-decoration: underline;
-	color: var(--orange);
-	transition: 0.9s ease;
+.card_sty:hover{
+	box-shadow: none !important;
 }
-.teamlogo{
-	width: auto;
-	height: 5rem;
-}
+
 /* create an account  */
 
 .contact-form .image-holder {
@@ -133,8 +126,6 @@ h2{
 @media screen and (max-width: 767px){
 	.ourGoal{
 		margin-top: 2px;
-		height: 30vh;
-		font-size: 20px;
 	}
 	#navbtn{
 		margin: 5px 0;
@@ -157,6 +148,10 @@ h2{
   .banner{
 	width: 50%;
 	height: auto;
+  }
+  #h2{
+	font-weight: 600;
+	font-size: 20px !important;
   }
 
 }

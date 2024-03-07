@@ -1,23 +1,25 @@
 <?php
 
-	include 'admin/config.php';
-	$sql = "SELECT * FROM `partners` WHERE `id` = 0";
-	$query = mysqli_query($conn, $sql);
+include 'admin/config.php';
+$sql = "SELECT * FROM `partners` WHERE `id` = 0";
+$query = mysqli_query($conn, $sql);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="assets/images/fav.jpg">
-    <title>Document</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
- 	<link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/images/fav.jpg">
+  <title>Document</title>
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+
 <body>
-	<!-- nav -->
-<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <!-- nav -->
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container">
       <div class="d-flex align-items-center justify-content-center">
         <a class="navbar-brand" href="index.php"><img src="assets/images/logo.png" alt="" style="width: 70%" />
@@ -25,7 +27,7 @@
       </div>
       <button class="navbar-toggler shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
-    </button>
+      </button>
       <div class="collapse navbar-collapse " id="navbarNav">
         <hr>
         <ul class="navbar-nav ms-auto align-items-end ">
@@ -48,17 +50,19 @@
   <!-- first banner section end-->
 
   <!-- Brands -->
-  <section class="career-process py-0">
-    <div class="container justify-content-center ourGoal">
-      <div class="row justify-content-center" id="career-header">
-        <div class="col-12 col-md-6 mt-4 order-1 text-center">
-              <h4>Our Goal</h4>
-              <div class="teamlogo">
-                <img src="assets/images/1.png" alt="" id="img" />
-              </div>
-            <p class="fs-1">
-            We want to create a friendly environment for our employees where he/she will get the environment to work .
+  <section class="career-process pt-5">
+    <div class="container ourGoal">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card card_sty shadow p-3 mb-5 bg-body rounded">
+            <div>
+              <img src="assets/images/1.png" alt="" id="img" />
+            </div>
+            <h4>Our Goal</h4>
+            <p>
+              We want to create a friendly environment for our employees where he/she will get the environment to work .
             </p>
+          </div>
         </div>
       </div>
     </div>
@@ -66,17 +70,17 @@
   <!-- career-process-section-end -->
 
   <!-- career-placement-partner-section -->
-  <section class="brands py-3 py-lg-5">
+  <section class="brands py-3 pt-lg-4 pb-lg-5">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-md-8 text-center">
-          <h2 class="text-uppercase fs-1 mb-4">
+          <h2 id="h2" class="text-uppercase fs-1 mb-4">
             Our Career Placement Partner
           </h2>
         </div>
       </div>
       <div class="row justify-content-center">
-		
+
         <div class="col-12 col-md-4">
           <div class="row justify-content-center">
             <div class="col-4 align-self-center text-center mt-4 mt-md-0">
@@ -88,7 +92,7 @@
             <div class="col-4 align-self-center text-center mt-4 mt-md-0">
               <img src="assets/images/3.png" alt="" class="img-fluid" />
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -97,41 +101,41 @@
 
   <!-- contact form start -->
   <section class="contact-form pb-5 mt-3">
-      <div class="container">
-        <div class="row">
-          <div class="col-12"> 
-            <h2 class="text-uppercase fs-1 mb-4 text-center">Send us your CV</h2>
-          </div>
-        </div>
-        <div class="d-flex justify-content-start cv">
-          <div class="image-holder"></div>
-          <form class="form" method="post">
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control shadow-none" id="name"placeholder="Name">
-                <label for="name">Name</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="email" class="form-control shadow-none" id="email"placeholder="Email">
-                <label for="email">Email</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="number" class="form-control shadow-none" id="number"placeholder="Number">
-                <label for="number">Number</label>
-            </div>
-            <div class="form-floating mb-3">
-                <input type="text" class="form-control shadow-none" id="address" placeholder="Address">
-                <label for="address">Address</label>
-            </div>
-            <div class="form-group mt-2">
-              <label for="cv">CV</label>
-              <input type="file" class="form-control form-control-lg shadow-none" id="cv" />
-            </div>
-            <div class="form-group mt-5">
-              <button class="form-control form-control-lg text-uppercase shadow-none submit" id="submit" type="submit">Submit</button>
-            </div>
-          </form>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 id="h2" class="text-uppercase fs-1 mb-4 text-center">Send us your CV</h2>
         </div>
       </div>
+      <div class="d-flex justify-content-start cv">
+        <div class="image-holder"></div>
+        <form class="form" method="post">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control shadow-none" id="name" placeholder="Name">
+            <label for="name">Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control shadow-none" id="email" placeholder="Email">
+            <label for="email">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control shadow-none" id="number" placeholder="Number">
+            <label for="number">Number</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control shadow-none" id="address" placeholder="Address">
+            <label for="address">Address</label>
+          </div>
+          <div class="form-group mt-2">
+            <label for="cv">CV</label>
+            <input type="file" class="form-control form-control-lg shadow-none" id="cv" />
+          </div>
+          <div class="form-group mt-5">
+            <button class="form-control form-control-lg text-uppercase shadow-none submit" id="submit" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </section>
   <!-- contact form end -->
 
@@ -153,4 +157,5 @@
   <script src="assets/js/jquery-3.7.1.js"></script>
 
 </body>
+
 </html>
