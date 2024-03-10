@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2024 at 05:14 AM
+-- Generation Time: Mar 10, 2024 at 09:14 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,13 +40,40 @@ CREATE TABLE `applications` (
   `cv` varchar(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `applications`
+-- Table structure for table `cv_drop`
 --
 
-INSERT INTO `applications` (`id`, `job_post_id`, `name`, `email`, `number`, `age`, `uni_ins_name`, `sub_dep_name`, `year_senmister_name`, `cv`) VALUES
-(4, 1, 'Rhishi Kesh', 'reshikash300@gmail.com', '01629005842', 21, 'da', 'ad', 'adsf', 'Sarmily Biswas CV (1).pdf'),
-(5, 1, 'hi', 'hi@gmail.com', '01723344567', 25, 'fd', 'df', 'fd', '8TH FLOOR.pdf');
+CREATE TABLE `cv_drop` (
+  `id` int(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `number` int(20) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `pdf_cv` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cv_drop`
+--
+
+INSERT INTO `cv_drop` (`id`, `name`, `email`, `number`, `address`, `pdf_cv`) VALUES
+(1, 'admin', 'res1@gmail.com', 1629005842, 'er', 'Syful.pdf'),
+(2, 'admin', 'res2@gmail.com', 1629005842, 'er', 'Capture1.PNG'),
+(3, 'rohm hossain', 'res7@gmail.com', 1629005844, 'er', 'Syful.pdf'),
+(4, 'Geoffrey Sawyer', 'pyvyw@mailinator.com', 1716726510, 'Nisi aliquip ipsum ', 'CamScanner 01-28-2024 13.25.pdf'),
+(5, 'Oliver Carson', 'herusywola@mailinator.com', 1471112223, 'Natus aperiam labore', 'CamScanner 01-28-2024 13.25.pdf'),
+(6, 'Martena Gentry', 'mdsyful243@gmail.com', 1477777888, 'Doloremque commodo n', 'Option-04.pdf'),
+(7, 'Wynter Haynes', 'nirupyvu@mailinator.com', 1477777888, 'Cumque reiciendis es', 'Option-01 (1).pdf'),
+(8, 'Emerson Brock', 'gilaqity@mailinator.com', 1712345678, 'Labore voluptatem V', 'Option-04.pdf'),
+(9, 'Danielle Blanchard', 'qoda@mailinator.com', 1478945632, 'Itaque voluptas dict', 'Option-02.pdf'),
+(10, 'Tana Mitchell', 'beco@mailinator.com', 1477777888, 'Perferendis et non s', 'Option-01.pdf'),
+(11, 'Xenos Walters', 'dipo@mailinator.com', 1932456874, 'Veritatis aliquid si', 'Option-01 (1).pdf'),
+(12, 'Channing James', 'megecob@mailinator.com', 1932456874, 'Id atque odit dolore', 'Option-04.pdf'),
+(13, 'Ainsley Gibbs', 'zetejajyb@mailinator.com', 1932456874, 'Soluta amet qui qui', 'CamScanner 01-28-2024 13.25.pdf'),
+(14, 'Hillary Sawyer', 'tuhipyhydo@mailinator.com', 1932456872, 'Provident rem itaqu', 'CamScanner 01-28-2024 13.25.pdf');
 
 -- --------------------------------------------------------
 
@@ -64,15 +91,6 @@ CREATE TABLE `jobposts` (
   `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `jobposts`
---
-
-INSERT INTO `jobposts` (`id`, `post_title`, `company_title`, `company_logo`, `company_details`, `job_position`, `status`) VALUES
-(1, 'df', 'asdf', 'df', 'afd', 'adf', 0),
-(2, 'title', 'dd', '369Capture.PNG', '', 'pp', 0),
-(3, 'title', 'dd', '439Screenshot 2024-02-29 at 17-48-12 Career Development.png', '<p>l</p>\r\n', 'pp', 0);
-
 -- --------------------------------------------------------
 
 --
@@ -89,12 +107,10 @@ CREATE TABLE `partners` (
 --
 
 INSERT INTO `partners` (`id`, `image`) VALUES
-(29, '704syful.PNG'),
-(31, '494Capture.PNG'),
-(32, '685Screenshot 2024-02-29 at 17-45-47 Our Jobs.png'),
-(33, '736pexels-mikael-blomkvist-6476255.jpg'),
-(34, '257'),
-(35, '557pexels-fauxels-3182812.jpg');
+(38, '919Capture.PNG'),
+(39, '768pexels-fauxels-3182812.jpg'),
+(40, '861pexels-mikhail-nilov-6930549.jpg'),
+(41, '050syful.PNG');
 
 -- --------------------------------------------------------
 
@@ -127,6 +143,12 @@ ALTER TABLE `applications`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cv_drop`
+--
+ALTER TABLE `cv_drop`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `jobposts`
 --
 ALTER TABLE `jobposts`
@@ -155,6 +177,12 @@ ALTER TABLE `applications`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `cv_drop`
+--
+ALTER TABLE `cv_drop`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT for table `jobposts`
 --
 ALTER TABLE `jobposts`
@@ -164,7 +192,7 @@ ALTER TABLE `jobposts`
 -- AUTO_INCREMENT for table `partners`
 --
 ALTER TABLE `partners`
-  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -13,8 +13,8 @@
     $year_senmister_name = mysqli_real_escape_string($conn, $_POST['year_senmister_name']);
     $job_position = mysqli_real_escape_string($conn, $_POST['job_position']);
 
-    $file_name=$_FILES['cv']['name'];
-    $tmp_name=$_FILES['cv']['tmp_name'];
+    $file_name= $_FILES['cv']['name'];
+    $tmp_name= $_FILES['cv']['tmp_name'];
 
     //email exest or not
     $sql = "SELECT * FROM `applications` WHERE email = '$email'";
@@ -240,5 +240,4 @@
     }
     header('Content-Type: application/json');
 	  echo json_encode($respons);
-
 ?>
