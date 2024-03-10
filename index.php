@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include 'admin/config.php';
 $sql = "SELECT * FROM `partners`";
 $query = mysqli_query($conn, $sql);
@@ -74,7 +74,7 @@ $query = mysqli_query($conn, $sql);
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-md-8 text-center">
-          <h2 id="h2" class="text-uppercase fs-1 mb-4">
+          <h2 id="h2" class="fw-bold fs-1 mb-4">
             Our Career Placement Partner
           </h2>
         </div>
@@ -99,47 +99,49 @@ $query = mysqli_query($conn, $sql);
   </section>
   <!-- Brands-end -->
 
-    <!-- contact form start -->
+  <!-- contact form start -->
 
   <section class="contact-form pb-5 mt-3">
-      <div class="container">
-          <div class="row">
-              <div class="col-12">
-                  <h2 id="h2" class="text-uppercase fs-1 mb-4 text-center">Send us your CV</h2>
-              </div>
-          </div>
-          <div class="d-flex justify-content-start cv">
-              <div class="image-holder"></div>
-              <form action="" id="cv_form" class="form" method="post" enctype="multipart/form-data">
-                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control shadow-none" name="name" id="name" required  placeholder="Name">
-                      <label for="name">Name</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                      <input type="email" class="form-control shadow-none" name="email" id="email" required  placeholder="Email">
-                      <label for="email">Email</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                      <input type="number" class="form-control shadow-none" name="number" id="number" required  placeholder="Number">
-                      <label for="number">Number</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                      <input type="text" class="form-control shadow-none" name="address" id="address"  required placeholder="Address">
-                      <label for="address">Address</label>
-                  </div>
-                  <div class="form-group mt-2">
-                      <label for="cv">CV</label>
-                      <input type="file" class="form-control form-control-lg shadow-none" name="pdf_cv" id="cv"  required  />
-                  </div>
-                  <div class="form-group mt-4">
-                      <p id="thank_you_msg"></p>
-                      <button class="form-control form-control-lg text-uppercase shadow-none submit"  name="submit" id="submit" type="submit">Submit <span class="text-white" id="loader" style="width: 20px; height: 20px"></span> </button>
-                  </div>
-              </form>
-          </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <h2 id="h2" class="fw-bold fs-1 mb-4 text-center">Send us your CV</h2>
+        </div>
       </div>
+      <div class="d-flex justify-content-start cv">
+        <div class="image-holder"></div>
+        <form action="" id="cv_form" class="form" method="post" enctype="multipart/form-data">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control shadow-none" name="name" id="name" required placeholder="Name">
+            <label for="name">Name</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="email" class="form-control shadow-none" name="email" id="email" required placeholder="Email">
+            <label for="email">Email</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="number" class="form-control shadow-none" name="number" id="number" required placeholder="Number">
+            <label for="number">Number</label>
+          </div>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control shadow-none" name="address" id="address" required placeholder="Address">
+            <label for="address">Address</label>
+          </div>
+          <div class="form-group mt-2">
+            <label for="cv">CV</label>
+            <input type="file" class="form-control form-control-lg shadow-none" name="pdf_cv" accept=".pdf" id="cv" required />
+          </div>
+          <div class="form-group mt-4">
+              <div class="alert-danger" id="thank_you_msg"></div>
+            <button class="form-control form-control-lg text-uppercase shadow-none submit" name="submit" id="submit" type="submit">Submit
+              <span class="text-white" id="loader" style="width: 20px; height: 20px"></span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   </section>
-    <!-- contact form end -->
+  <!-- contact form end -->
 
   <!-- footer-start -->
   <footer class="py-2 bg-color">
@@ -158,32 +160,32 @@ $query = mysqli_query($conn, $sql);
   <script src="assets/js/bootstrap.bundle.min.js"></script>
   <script src="assets/js/jquery-3.7.1.js"></script>
   <script>
-
-		$(document).ready(function() {
-			$('#cv_form').on('submit', function(e) {
+    $(document).ready(function() {
+      $('#cv_form').on('submit', function(e) {
         e.preventDefault();
         $('#loader').addClass('spinner-border');
-				var data = new FormData(this);
+        $('#submit').attr("disabled", true);
+        var data = new FormData(this);
         $.ajax({
-					url: "rr.php",
-					type: "POST",
-					dataType: 'json',
-					data: data,
-					contentType: false,
-					processData: false,
-					success: function(respons) {
-						jQuery('#thank_you_msg').addClass('failed').html(respons.message);
-						if (respons.message == 'success') {
-              console.log("OK");
-							// window.location.href = "success.php";
-						}
-					}
-				}).done((respons) => {
-					$('#loader').removeClass('spinner-border');
-				})
-			});
-		});   
-	</script>
+          url: "rr.php",
+          type: "POST",
+          dataType: 'json',
+          data: data,
+          contentType: false,
+          processData: false,
+          success: function(respons) {
+            jQuery('#thank_you_msg').addClass('alert').html(respons.message);
+            if (respons.message == 'success') {
+              window.location.href = "submit-success.php";
+            }
+          }
+        }).done((respons) => {
+          $('#loader').removeClass('spinner-border');
+          $("#submit").removeAttr("disabled");
+        })
+      });
+    });
+  </script>
 
 </body>
 

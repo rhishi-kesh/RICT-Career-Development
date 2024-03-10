@@ -57,7 +57,7 @@
 </head>
 <body>
 	<div class="center">
-		<img src="logo.png" alt="img" class="img-fluid" width="200">
+		<img src="assets/images/logo.png" alt="img" class="img-fluid" width="200">
 		<h3 class="mt-3 mb-0">Congratulations! Your Application Was Submitted Successfully!</h3>
 		<p class="mb-0">Thank you for applying for the <?php echo $_SESSION['job_position'] ?> at Rayhan’s ICT Ltd. Your application has been successfully received.</p>
 		<div class="p-3 box mt-3">
