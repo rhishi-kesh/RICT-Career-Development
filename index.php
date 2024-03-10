@@ -81,12 +81,12 @@ $query = mysqli_query($conn, $sql);
       </div>
       <div class="row justify-content-center">
 
-        <div class="col-12 col-md-4">
+        <div class="col-12 col-md-6">
           <div class="row justify-content-center">
             <?php
             foreach ($query as $item) {
             ?>
-              <div class="col-4 align-self-center text-center mt-4 mt-md-0">
+              <div class="col-6 col-md-4 col-lg-3 align-self-center text-center mt-4 mt-md-0">
                 <img src="admin/upload/partners/<?php echo $item['image'] ?>" alt="" class="img-fluid" />
               </div>
             <?php
@@ -101,7 +101,7 @@ $query = mysqli_query($conn, $sql);
 
   <!-- contact form start -->
 
-  <section class="contact-form pb-5 mt-3">
+  <section class="contact-form pb-5 mt-2">
     <div class="container">
       <div class="row">
         <div class="col-12">
