@@ -11,6 +11,7 @@
 ## Technology Used
 
 - PHP
+- Ajax 
 - Mysql
 - HTML
 - CSS
