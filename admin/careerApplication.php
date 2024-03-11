@@ -2,9 +2,11 @@
 include 'config.php';
 session_start();
 ob_start();
+if (!isset($_SESSION['user_name'])) {
+   header('location: index.php');
+}
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +16,7 @@ ob_start();
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <meta name="description" content="">
    <meta name="author" content="">
-   <title>Admin - Dashboard</title>
+   <title>Career Applicatiion</title>
    <!-- Custom fonts for this template-->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
@@ -36,6 +38,8 @@ ob_start();
          <!-- Divider -->
          <hr class="sidebar-divider my-0">
          <!-- Nav Item - Dashboard -->
+         <hr class="sidebar-divider">
+         <!-- Nav Item - Utilities Collapse Menu -->
          <li class="nav-item">
             <a class="nav-link" href="main.php"> <span>Job Posts</span></a>
          </li>
@@ -50,14 +54,12 @@ ob_start();
          <!-- Nav Item - Utilities Collapse Menu -->
          <li class="nav-item">
             <a class="nav-link" href="partners.php"> <span>Partners</span></a>
-            <!-- Divider -->
          </li>
-          <!-- career application -->
-          <hr class="sidebar-divider">
-            <!-- career application -->
-            <li class="nav-item">
-               <a class="nav-link" href="careerApplication.php"> <span>Career Application</span></a>
-            </li>
+         <hr class="sidebar-divider">
+         <!-- career application -->
+         <li class="nav-item">
+            <a class="nav-link" href="careerApplication.php"> <span>Career Application</span></a>
+         </li>
          <!-- Divider -->
          <hr class="sidebar-divider d-none d-md-block">
          <!-- Sidebar Toggler (Sidebar) -->
@@ -103,7 +105,7 @@ ob_start();
                      <!-- Dropdown - User Information -->
                      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <form action="" method="POST">
-                           <button class="dropdown-item" type="submit" name="logout" <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
+                           <button class="dropdown-item" type="submit" name="logout"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
                         </form>
                      </div>
                   </li>
@@ -112,54 +114,78 @@ ob_start();
             <!-- End header -->
             <!-- Begin Page Content -->
             <div class="container-fluid">
-               <div class="row justify-content-center">
-                  <div class="col-12 col-md-8">
-                     <h2>Update & Edit Job Post</h2>
-
-                     <?php
-                     $id = $_GET['id'];
-                     $showquery = "SELECT * FROM partners WHERE id='$id' ";
-                     $showdata = mysqli_query($conn, $showquery);
-
-                     if (mysqli_num_rows($showdata) > 0) 
-                     {
-                        foreach ($showdata as $item) {
-                     ?>
-                           <form action="code.php" method="POST" enctype="multipart/form-data">
-                             
-                              <input type="hidden" name="img_id" value="<?php echo $item['id']; ?>" class="form-control">
-                             
-                              <div class="form-outline py-5 mb-4">
-                                 <label class="form-label" for="partnerimg">Update Image</label>
-                                 <input type="file" name="image" class="form-control">
-                                 <input type="hidden" name="old_image" value="<?php echo $item['image'] ?>" class="form-control" name="partnerimg" />
-                                 <td>
-                                    <img src="<?php echo "upload/partners/".$item['image']; ?>" width="70" height="70" alt="image">
-                                 </td>
-                              </div>
-                              <button  name="update_img" type="submit" class="btn btn-primary mb-4">Update</button>
-                              <a href="partners.php" class="btn btn-secondary mb-4">Back</a>
-                           </form>
-                     <?php
-                        }
-                     } else {
-                        echo "No record...!";
-                     }
-                     ?>
+               <!-- Page Heading -->
+               <h5 class="mb-2 text-gray-800">Career Applications</h5>
+               <!-- DataTales Example -->
+               <div class="card shadow">
+                  <div class="card-header py-3 d-flex justify-content-between">
+                  </div>
+                  <div class="card-body">
+                     <div class="table-responsive">
+                        
+                        <div class="tab-content" id="nav-tabContent">
+                           <?php
+                           $sql = "SELECT * FROM `cv_drop`";
+                           $query = mysqli_query($conn, $sql);
+                           ?>
+                           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                              <thead>
+                                 <tr>
+                                    <th>SL</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>PDF CV</th>
+                                    <th colspan="2">Action</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <?php
+                                 if (mysqli_num_rows($query) > 0) {
+                                    foreach ($query as $item) {
+                                 ?>
+                                       <tr>
+                                          <td><?php echo $item['id'] ?></td>
+                                          <td><?= $item['name'] ?></td>
+                                          <td><?= $item['email'] ?></td>
+                                          <td><?= $item['number'] ?></td>
+                                          <td><?= $item['address'] ?></td>
+                                          <td><?= $item['pdf_cv'] ?></td>
+                                          <td colspan="2">
+                                             <a href="#id<?= $item['id'] ?>" data-bs-toggle="modal" style="text-decoration: none">
+                                                <i class="fa-regular fa-eye"></i>
+                                             </a>
+                                             <form action="" method="POST" class="d-inline-block ms-1">
+                                                <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
+                                             <input type="hidden" name="pdf_cv" value="<?php echo $item['pdf_cv'] ?>">
+                                                <button type="submit" name="delete" class="bg-white border-0">
+                                                   <i class="fa-solid fa-trash text-danger"></i>
+                                                </button>
+                                             </form>
+                                          </td>
+                                       </tr>
+                                    <?php } ?>
+                              </tbody>
+                           </table>
+                        </div>
+                     <?php } ?>
+                     </div>
                   </div>
                </div>
             </div>
-            <!-- /.container-fluid -->
          </div>
          <!-- Footer -->
          <footer class="sticky-footer bg-white">
             <div class="container my-auto">
-               <div class="copyright text-center my-auto"> <span class="text-center">Copyright &copy; CREATIVE SHEBA LIMITED</span> </div>
+               <div class="copyright text-center my-auto"> <span>Copyright &copy; Blog 2022</span> </div>
             </div>
          </footer>
          <!-- End of Footer -->
+         <!-- /.container-fluid -->
       </div>
-      <!-- End of Content Wrapper -->
+   </div>
+   <!-- End of Content Wrapper -->
    </div>
    <!-- End of Page Wrapper -->
    <!-- Scroll to Top Button-->
@@ -174,18 +200,30 @@ ob_start();
    <script src="vendor/js/sb-admin-2.min.js"></script>
    <!-- Page level plugins -->
    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-   <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
    <script>
-      CKEDITOR.replace('job_description');
+      CKEDITOR.replace('blog_body');
    </script>
 </body>
 
 </html>
 <?php
-if (isset($_POST['logout'])) {
-   session_unset();
-   session_destroy();
-   header("location: index.php");
-   exit();
-}
+
+   if (isset($_POST['delete'])) {
+      $id = $_POST['delete_id'];
+      $stu_image = $_POST['pdf_cv'];
+  
+      $query = "DELETE FROM cv_drop WHERE id='$id' ";
+      $query_run = mysqli_query($conn, $query);
+  
+      if ($query_run) {
+  
+          unlink("../upload/CvDrop/".$stu_image);
+          $_SESSION['status'] = "Data Delete successfully!";
+          header('location: careerApplication.php');
+      } else {
+          $_SESSION['status'] = "Data Not Delete successfully....!!";
+          header('location: careerApplication.php');
+      }
+  }
+
 ?>

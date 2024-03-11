@@ -20,6 +20,7 @@
     // mail config
     include('smtp/PHPMailerAutoload.php');
     // $respons['message'] = 'success';
+
     $html = "
       <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
       <html dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:o='urn:schemas-microsoft-com:office:office' lang='en' style='font-family:arial, 'helvetica neue', helvetica, sans-serif'>
@@ -101,7 +102,19 @@
                                 Dear &nbsp;$name,
                                 </h3>
                                 <p style='Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-family:Imprima, Arial, sans-serif;line-height:27px;color:#2D3142;font-size:18px'>
-                                    OK
+
+                                I hope this email finds you well. <br>
+                                
+                                I am writing to acknowledge the receipt of your CV that you recently submitted for [position/role] at  Rayhan’s ICT Ltd. We appreciate your interest in joining our team.  <br>
+                                
+                                Our HR team will carefully review your qualifications and experience, and we will be in touch with you soon regarding the next steps of the hiring process. In the meantime, if there are any updates to your contact information or if you have any questions, please feel free to reach out to us. <br>
+                                
+                                Thank you once again for considering a career opportunity with Rayhan’s Group. We look forward to potentially working with you. <br>
+                                
+                                Best regards,
+                                Department of HR
+                                Rayhan’s ICT Ltd .
+                                
                                 </p>
                             </td>
                           </tr>
@@ -174,9 +187,9 @@
       </body>
       </html>
     ";
-    // message send
+    // message send TO Phone
     $send_sms_num = '88' . $number;
-    function send_cv_sms($send_sms_num)
+    function send_cv_sms($send_sms_num, $name)
     {
         $url = "https://880sms.com/smsapi";
         $data =  $data = [
@@ -184,7 +197,7 @@
             "type" => "text",
             "contacts" => "$send_sms_num",
             "senderid" => "RAYHAN'S ICT",
-            "msg" => "SMS",
+            "msg" => "Hello '$name' , this is Rayhan’s ICT Ltd. We've received your CV for [position/role]. Our HR team will review it and get back to you soon. Feel free to update your contact info or ask questions. Thank you for considering Rayhan’s Group. Best, HR Dept.",
         ];
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -220,7 +233,7 @@
                         $mail->setFrom("rayhansict.info@gmail.com");
                         $mail->addAddress("$email");
                         $mail->IsHTML(true);
-                        $mail->Subject = "Confirmation of CV Review by HR Team";
+                        $mail->Subject = "Acknowledgement of Receipt of Your CV";
                         $mail->Body = $html;
                         $mail->SMTPOptions = array('ssl' => array(
                             'verify_peer' => false,
@@ -229,7 +242,7 @@
                         ));
                         $mail->send();
                         //sms send
-                        send_cv_sms($send_sms_num);
+                        send_cv_sms($send_sms_num, $name);
                         //job_position
                         // $_SESSION['pdf_cv'] = $file_name;
                         //success

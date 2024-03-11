@@ -45,13 +45,19 @@ if (!isset($_SESSION['user_name'])) {
          <hr class="sidebar-divider">
          <!-- Nav Item - Utilities Collapse Menu -->
          <li class="nav-item">
-            <a class="nav-link" href="application.php"> <span>Applications</span></a>
+            <a class="nav-link" href="application.php"> <span>Job Applications</span></a>
          </li>
          <hr class="sidebar-divider">
          <!-- Nav Item - Utilities Collapse Menu -->
          <li class="nav-item">
             <a class="nav-link" href="partners.php"> <span>Partners</span></a>
          </li>
+         <!-- career application -->
+         <hr class="sidebar-divider">
+            <!-- career application -->
+            <li class="nav-item">
+               <a class="nav-link" href="careerApplication.php"> <span>Career Application</span></a>
+            </li>
          <!-- Divider -->
          <hr class="sidebar-divider d-none d-md-block">
          <!-- Sidebar Toggler (Sidebar) -->
@@ -119,7 +125,6 @@ if (!isset($_SESSION['user_name'])) {
                   </div>
                   <div class="card-body">
                      <?php
-                     $conn = mysqli_connect("localhost", "root", "", "rictjob_potal");
                      $sql = "SELECT * FROM `partners`";
                      $query = mysqli_query($conn, $sql);
 
@@ -134,23 +139,23 @@ if (!isset($_SESSION['user_name'])) {
                               </tr>
                            </thead>
                            <tbody>
-                              <?php
-                              if (isset($_SESSION['status']) && $_SESSION != '') {
-                              ?>
-                                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <strong>Hey!</strong><?php echo $_SESSION['status']; ?>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                       <span aria-hidden="true">&times;</span>
-                                    </button>
-                                 </div>
-                              <?php
-                                 unset($_SESSION['status']);
-                              }
-                              ?>
-                              <?php
-                              if (mysqli_num_rows($query) > 0) {
-                                 foreach ($query as $item) {
-                              ?>
+                                    <?php
+                                    if (isset($_SESSION['status']) && $_SESSION != '') {
+                                    ?>
+                                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                          <strong>Hey!</strong><?php echo $_SESSION['status']; ?>
+                                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                          </button>
+                                       </div>
+                                    <?php
+                                       unset($_SESSION['status']);
+                                    }
+                                    ?>
+                                    <?php
+                                    if (mysqli_num_rows($query) > 0) {
+                                       foreach ($query as $item) {
+                                    ?>
                                     <tr>
                                        <td><?php echo $item['id'] ?></td>
                                        <td>
@@ -167,7 +172,7 @@ if (!isset($_SESSION['user_name'])) {
                                           </a>
                                           <form action="code.php" method="POST" class="d-inline-block ms-1" onsubmit="">
                                              <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
-                                             <input type="hidden" name="del_stu_image" value="<?php echo $item['image']?>">
+                                             <input type="hidden" name="del_stu_image" value="<?php echo $item['image'] ?>">
                                              <button type="submit" name="delete_data" class="bg-white border-0">
                                                 <i class="fa-solid fa-trash text-danger"></i>
                                              </button>

@@ -85,7 +85,7 @@
             <hr class="sidebar-divider">
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-               <a class="nav-link" href="application.php"> <span>Applications</span></a>
+               <a class="nav-link" href="application.php"> <span>Job Applications</span></a>
             </li>
              <!-- Divider -->
              <hr class="sidebar-divider">
@@ -93,6 +93,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="placementpartner.php"> <span>Partners</span></a>
                 <!-- Divider -->
+            </li>
+             <!-- career application -->
+             <hr class="sidebar-divider">
+            <!-- career application -->
+            <li class="nav-item">
+               <a class="nav-link" href="careerApplication.php"> <span>Career Application</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
