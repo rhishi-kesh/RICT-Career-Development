@@ -9,6 +9,9 @@
     $address = mysqli_real_escape_string($conn, $_POST['address']);
 
     $file_name = $_FILES['pdf_cv']['name'];
+    $random = rand(000, 999);
+    $random = str_pad($random, 3, '0', STR_PAD_LEFT);
+    $file_name = $random . $file_name;
     $tmp_name = $_FILES['pdf_cv']['tmp_name'];
     
     $allowed_extension = array('pdf');
@@ -189,25 +192,25 @@
     ";
     // message send TO Phone
     $send_sms_num = '88' . $number;
-    function send_cv_sms($send_sms_num, $name)
-    {
-        $url = "https://880sms.com/smsapi";
-        $data =  $data = [
-            "api_key" => "C20070576581b892abb538.40220352",
-            "type" => "text",
-            "contacts" => "$send_sms_num",
-            "senderid" => "RAYHAN'S ICT",
-            "msg" => "Hello '$name' , this is Rayhan’s ICT Ltd. We've received your CV for [position/role]. Our HR team will review it and get back to you soon. Feel free to update your contact info or ask questions. Thank you for considering Rayhan’s Group. Best, HR Dept.",
-        ];
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        $response = curl_exec($ch);
-        curl_close($ch);
-    }
+    // function send_cv_sms($send_sms_num, $name)
+    // {
+    //     $url = "https://880sms.com/smsapi";
+    //     $data =  $data = [
+    //         "api_key" => "C20070576581b892abb538.40220352",
+    //         "type" => "text",
+    //         "contacts" => "$send_sms_num",
+    //         "senderid" => "RAYHAN'S ICT",
+    //         "msg" => "Hello '$name' , this is Rayhan’s ICT Ltd. We've received your CV for [position/role]. Our HR team will review it and get back to you soon. Feel free to update your contact info or ask questions. Thank you for considering Rayhan’s Group. Best, HR Dept.",
+    //     ];
+    //     $ch = curl_init();
+    //     curl_setopt($ch, CURLOPT_URL, $url);
+    //     curl_setopt($ch, CURLOPT_POST, 1);
+    //     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+    //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    //     $response = curl_exec($ch);
+    //     curl_close($ch);
+    // }
     if (!empty($name) && !empty($email) && !empty($number) && !empty($address) && !empty($file_name)) {
         if ($if_match) {
             $respons['message'] = 'Email already exists';
@@ -242,7 +245,8 @@
                         ));
                         $mail->send();
                         //sms send
-                        send_cv_sms($send_sms_num, $name);
+
+                        // send_cv_sms($send_sms_num, $name);
                         //job_position
                         // $_SESSION['pdf_cv'] = $file_name;
                         //success

@@ -143,7 +143,7 @@ if (!isset($_SESSION['user_name'])) {
                                     if (isset($_SESSION['status']) && $_SESSION != '') {
                                     ?>
                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                                          <strong>Hey!</strong><?php echo $_SESSION['status']; ?>
+                                          <?php echo $_SESSION['status']; ?>
                                           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                              <span aria-hidden="true">&times;</span>
                                           </button>
@@ -152,12 +152,13 @@ if (!isset($_SESSION['user_name'])) {
                                        unset($_SESSION['status']);
                                     }
                                     ?>
+                                    <?php $count = 1?>
                                     <?php
                                     if (mysqli_num_rows($query) > 0) {
                                        foreach ($query as $item) {
                                     ?>
                                     <tr>
-                                       <td><?php echo $item['id'] ?></td>
+                                       <td><?php echo $count++ ?></td>
                                        <td>
                                           <img src="<?php echo "upload/partners/" . $item['image']; ?>" width="70" height="70" alt="image">
                                        </td>

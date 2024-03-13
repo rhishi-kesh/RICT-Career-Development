@@ -135,36 +135,63 @@ if (!isset($_SESSION['user_name'])) {
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
-                                    <th>Address</th>
-                                    <th>PDF CV</th>
                                     <th colspan="2">Action</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <?php
+                                    if (isset($_SESSION['status']) && $_SESSION != '') {
+                                    ?>
+                                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                          <?php echo $_SESSION['status']; ?>
+                                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                             <span aria-hidden="true">&times;</span>
+                                          </button>
+                                       </div>
+                                    <?php
+                                       unset($_SESSION['status']);
+                                    }
+                                 ?>
+                                 <?php $count = 1 ?>
+                                 <?php
                                  if (mysqli_num_rows($query) > 0) {
                                     foreach ($query as $item) {
                                  ?>
                                        <tr>
-                                          <td><?php echo $item['id'] ?></td>
+                                          <td><?php echo $count++ ?></td>
                                           <td><?= $item['name'] ?></td>
                                           <td><?= $item['email'] ?></td>
                                           <td><?= $item['number'] ?></td>
-                                          <td><?= $item['address'] ?></td>
-                                          <td><?= $item['pdf_cv'] ?></td>
                                           <td colspan="2">
                                              <a href="#id<?= $item['id'] ?>" data-bs-toggle="modal" style="text-decoration: none">
                                                 <i class="fa-regular fa-eye"></i>
                                              </a>
                                              <form action="" method="POST" class="d-inline-block ms-1">
                                                 <input type="hidden" name="delete_id" value="<?= $item['id'] ?>">
-                                             <input type="hidden" name="pdf_cv" value="<?php echo $item['pdf_cv'] ?>">
+                                                <input type="hidden" name="pdf_stu_cv" value="<?php echo $item['pdf_cv'] ?>">
                                                 <button type="submit" name="delete" class="bg-white border-0">
                                                    <i class="fa-solid fa-trash text-danger"></i>
                                                 </button>
                                              </form>
                                           </td>
                                        </tr>
+                                       <div class="modal fade" id="id<?= $item['id'] ?>" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                             <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                   <div class="modal-header">
+                                                      <h5 class="modal-title" id="staticBackdropLabel"><?= $item['name'] ?></h5>
+                                                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                   </div>
+                                                   <div class="modal-body">
+                                                      <p class="lead"><b>Name:</b> <?= $item['name'] ?></p>
+                                                      <p class="lead"><b>Email:</b> <?= $item['email'] ?></p>
+                                                      <p class="lead"><b>Phone:</b> <?= $item['number'] ?></p>
+                                                      <p class="lead"><b>Address:</b> <?= $item['address'] ?></p>
+                                                      <p class="lead"><b>Pdf-CV:</b> <a href="../upload/CvDrop/<?= $item['pdf_cv'] ?>" target="_blank">Download Pdf</a></p>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
                                     <?php } ?>
                               </tbody>
                            </table>
@@ -176,9 +203,9 @@ if (!isset($_SESSION['user_name'])) {
             </div>
          </div>
          <!-- Footer -->
-         <footer class="sticky-footer bg-white">
+         <footer class="sticky-footer p-0 bg-white">
             <div class="container my-auto">
-               <div class="copyright text-center my-auto"> <span>Copyright &copy; Blog 2022</span> </div>
+               <div class="copyright fixed-bottom text-center mb-3 my-auto"> <span>Copyright &copy; Blog 2022</span> </div>
             </div>
          </footer>
          <!-- End of Footer -->
@@ -210,14 +237,13 @@ if (!isset($_SESSION['user_name'])) {
 
    if (isset($_POST['delete'])) {
       $id = $_POST['delete_id'];
-      $stu_image = $_POST['pdf_cv'];
-  
+      $stu_cv = $_POST['pdf_stu_cv'];
+
       $query = "DELETE FROM cv_drop WHERE id='$id' ";
       $query_run = mysqli_query($conn, $query);
   
       if ($query_run) {
-  
-          unlink("../upload/CvDrop/".$stu_image);
+          unlink("../upload/CvDrop/".$stu_cv);
           $_SESSION['status'] = "Data Delete successfully!";
           header('location: careerApplication.php');
       } else {

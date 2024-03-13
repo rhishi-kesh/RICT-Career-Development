@@ -66,7 +66,7 @@
                 <a href="single_jobpost.php?id=<?= $item['id'] ?>" class="d-block">
                   <div class="d-block d-md-flex justify-content-start">
                     <div class="d-block d-md-flex align-items-center justify-content-center me-4">
-                      <img src="assets/images/<?= $item['company_logo'] ?>" alt="" style="width: 150px" />
+                      <img src="admin/upload/<?= $item['company_logo'] ?>" alt="" style="width: 120px" />
                     </div>
                     <div>
                       <h4><?= $item['post_title'] ?></h4>

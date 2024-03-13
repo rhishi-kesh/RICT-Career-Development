@@ -107,7 +107,7 @@ $query = mysqli_query($conn, $sql);
                      <!-- Dropdown - User Information -->
                      <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                         <form action="" method="POST">
-                           <button class="dropdown-item" type="submit" name="logout" <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
+                           <button class="dropdown-item" type="submit" name="logout"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
                         </form>
                      </div>
                   </li>
@@ -117,7 +117,7 @@ $query = mysqli_query($conn, $sql);
             <!-- Begin Page Content -->
             <div class="container-fluid">
                <!-- Page Heading -->
-               <h5 class="mb-2 text-gray-800">Applications</h5>
+               <h5 class="mb-2 text-gray-800">Job Applications</h5>
                <!-- DataTales Example -->
                <div class="card shadow">
                   <div class="card-header py-3 d-flex justify-content-between">
@@ -190,7 +190,7 @@ $query = mysqli_query($conn, $sql);
                                                       <p class="lead"><b>Year/Semister Name:</b> <?= $item['year_senmister_name'] ?></p>
                                                       <p class="lead"><b>CV:</b> <a href="../upload/<?= $item['cv'] ?>" target="_blank">Download Pdf</a></p>
                                                    </div>
-                                                </div>
+                                                </div> 
                                              </div>
                                           </div>
                                        <?php } ?>
