@@ -45,12 +45,18 @@
             <hr class="sidebar-divider">
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-               <a class="nav-link" href="application.php"> <span>Applications</span></a>
+               <a class="nav-link" href="application.php"> <span>Job Applications</span></a>
             </li>
             <hr class="sidebar-divider">
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
                <a class="nav-link" href="partners.php"> <span>Partners</span></a>
+            </li>
+             <!-- career application -->
+             <hr class="sidebar-divider">
+            <!-- career application -->
+            <li class="nav-item">
+               <a class="nav-link" href="careerApplication.php"> <span>Career Application</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -97,7 +103,7 @@
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                            <form action="" method="POST">
-                              <button class="dropdown-item" type="submit" name="logout" <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
+                              <button class="dropdown-item" type="submit" name="logout"> <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout </button>
                            </form>
                         </div>
                      </li>

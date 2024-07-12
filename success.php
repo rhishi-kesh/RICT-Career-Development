@@ -63,7 +63,7 @@
 		<div class="p-3 box mt-3">
 			<p class="mb-0 lead">Our team will now carefully review your qualifications and experience.We appreciate your interest in joining our team and wish you the best of luck in the hiring process.</p>
 		</div>
-		<a href="index.php" class="btn success-btn shadow-none">Go Back</a>
+		<a href="ourJobs.php" class="btn success-btn shadow-none">Go Back</a>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
